@@ -1,0 +1,44 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model POAPEvent {
+  id         Int             @id @default(autoincrement())
+  externalID Int             @unique
+  image      String
+  createdAt  DateTime        @default(now())
+  claimCodes POAPClaimCode[]
+}
+
+model POAPClaimCode {
+  id          Int        @id @default(autoincrement())
+  event       POAPEvent  @relation(fields: [eventId], references: [id])
+  eventId     Int
+  qrHash      String     @unique
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  allowList   AllowList?
+  allowListId Int        @unique
+
+  @@index([eventId], type: Hash)
+}
+
+model AllowList {
+  id              Int           @id @default(autoincrement())
+  address         String
+  daoAddress      String        @unique
+  name            String
+  pOAPClaimCode   POAPClaimCode @relation(fields: [poapClaimCodeId], references: [id])
+  poapClaimCodeId Int           @unique
+  poapMinted      Boolean       @default(false)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @default(now()) @updatedAt
+}
