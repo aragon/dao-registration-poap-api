@@ -5,6 +5,8 @@ import { PrismaModule } from './prisma/prisma.module';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { GraphQLModule } from '@nestjs/graphql';
 import { PoapEventModule } from './poap-event/poap-event.module';
+import { PoapModule } from './poap/poap.module';
+import { PoapAuthModule } from './poap-auth/poap-auth.module';
 
 @Module({
   imports: [
@@ -18,10 +20,11 @@ import { PoapEventModule } from './poap-event/poap-event.module';
     }),
     PrismaModule,
     PoapEventModule,
-    PoapEventModule
+    PoapEventModule,
+    PoapModule,
+    PoapAuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-
 export class AppModule {}

@@ -12,8 +12,9 @@ datasource db {
 
 model POAPEvent {
   id         Int             @id @default(autoincrement())
-  externalID Int             @unique
-  image      String
+  externalId Int             @unique
+  secretCode String
+  image      String?
   createdAt  DateTime        @default(now())
   claimCodes POAPClaimCode[]
 }
@@ -26,7 +27,7 @@ model POAPClaimCode {
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
   allowList   AllowList?
-  allowListId Int        @unique
+  allowListId Int?
 
   @@index([eventId], type: Hash)
 }
@@ -41,4 +42,11 @@ model AllowList {
   poapMinted      Boolean       @default(false)
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @default(now()) @updatedAt
+}
+
+model POAPAuth {
+  id        Int      @id @default(autoincrement())
+  authToken String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 }
