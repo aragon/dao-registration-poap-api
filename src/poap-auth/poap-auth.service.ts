@@ -11,31 +11,6 @@ export class PoapAuthService {
     private readonly poapService: PoapService,
   ) {}
 
-  async createAuthToken() {
-    const authToken = await this.poapService.generateAuthToken();
-
-    return this.prismaService.pOAPAuth.create({
-      data: {
-        authToken,
-        createdAt: new Date(),
-      },
-    });
-  }
-
-  async refreshAuthToken(id: number) {
-    const authToken = await this.poapService.generateAuthToken();
-
-    return this.prismaService.pOAPAuth.update({
-      where: {
-        id,
-      },
-      data: {
-        authToken,
-        createdAt: new Date(),
-      },
-    });
-  }
-
   async getAuthToken(): Promise<POAPAuth> {
     const authToken = await this.prismaService.pOAPAuth.findFirst({
       orderBy: {
@@ -52,5 +27,30 @@ export class PoapAuthService {
     }
 
     return authToken;
+  }
+
+  private async createAuthToken() {
+    const authToken = await this.poapService.generateAuthToken();
+
+    return this.prismaService.pOAPAuth.create({
+      data: {
+        authToken,
+        createdAt: new Date(),
+      },
+    });
+  }
+
+  private async refreshAuthToken(id: number) {
+    const authToken = await this.poapService.generateAuthToken();
+
+    return this.prismaService.pOAPAuth.update({
+      where: {
+        id,
+      },
+      data: {
+        authToken,
+        createdAt: new Date(),
+      },
+    });
   }
 }

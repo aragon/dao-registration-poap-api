@@ -10,6 +10,13 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id             Int             @id @default(autoincrement())
+  address        String          @unique
+  isAdmin        Boolean         @default(false)
+  poapClaimCodes POAPClaimCode[]
+}
+
 model POAPEvent {
   id         Int             @id @default(autoincrement())
   externalId Int             @unique
@@ -20,28 +27,19 @@ model POAPEvent {
 }
 
 model POAPClaimCode {
-  id          Int        @id @default(autoincrement())
-  event       POAPEvent  @relation(fields: [eventId], references: [id])
-  eventId     Int
-  qrHash      String     @unique
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-  allowList   AllowList?
-  allowListId Int?
+  id         Int       @id @default(autoincrement())
+  event      POAPEvent @relation(fields: [eventId], references: [id])
+  eventId    Int
+  qrHash     String    @unique
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  user       User?     @relation(fields: [userId], references: [id])
+  userId     Int?
+  minted     Boolean   @default(false)
+  daoAddress String?   @unique
 
   @@index([eventId], type: Hash)
-}
-
-model AllowList {
-  id              Int           @id @default(autoincrement())
-  address         String
-  daoAddress      String        @unique
-  name            String
-  pOAPClaimCode   POAPClaimCode @relation(fields: [poapClaimCodeId], references: [id])
-  poapClaimCodeId Int           @unique
-  poapMinted      Boolean       @default(false)
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @default(now()) @updatedAt
+  @@index([userId], type: Hash)
 }
 
 model POAPAuth {
