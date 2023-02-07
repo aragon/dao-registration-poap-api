@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { POAPAuth } from '@prisma/client';
 import { subHours } from 'date-fns';
-import { PoapService } from 'src/poap/poap.service';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PoapService } from '../poap/poap.service';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class PoapAuthService {
