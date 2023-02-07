@@ -7,6 +7,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { PoapEventModule } from './poap-event/poap-event.module';
 import { PoapModule } from './poap/poap.module';
 import { PoapAuthModule } from './poap-auth/poap-auth.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { PoapAuthModule } from './poap-auth/poap-auth.module';
     PoapEventModule,
     PoapModule,
     PoapAuthModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],

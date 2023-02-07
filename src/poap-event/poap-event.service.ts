@@ -61,7 +61,6 @@ export class PoapEventService {
         qrHash: claimCode.qr_hash,
         eventId: createdEvent.id,
         createdAt: new Date(),
-        allowListId: null,
       })),
     });
 

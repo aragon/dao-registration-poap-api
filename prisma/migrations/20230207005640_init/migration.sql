@@ -1,4 +1,13 @@
 -- CreateTable
+CREATE TABLE "User" (
+    "id" SERIAL NOT NULL,
+    "address" TEXT NOT NULL,
+    "isAdmin" BOOLEAN NOT NULL DEFAULT false,
+
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "POAPEvent" (
     "id" SERIAL NOT NULL,
     "externalId" INTEGER NOT NULL,
@@ -16,23 +25,10 @@ CREATE TABLE "POAPClaimCode" (
     "qrHash" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "allowListId" INTEGER,
+    "userId" INTEGER,
+    "minted" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "POAPClaimCode_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "AllowList" (
-    "id" SERIAL NOT NULL,
-    "address" TEXT NOT NULL,
-    "daoAddress" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
-    "poapClaimCodeId" INTEGER NOT NULL,
-    "poapMinted" BOOLEAN NOT NULL DEFAULT false,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
-    CONSTRAINT "AllowList_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -46,6 +42,9 @@ CREATE TABLE "POAPAuth" (
 );
 
 -- CreateIndex
+CREATE UNIQUE INDEX "User_address_key" ON "User"("address");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "POAPEvent_externalId_key" ON "POAPEvent"("externalId");
 
 -- CreateIndex
@@ -55,16 +54,10 @@ CREATE UNIQUE INDEX "POAPClaimCode_qrHash_key" ON "POAPClaimCode"("qrHash");
 CREATE INDEX "POAPClaimCode_eventId_idx" ON "POAPClaimCode" USING HASH ("eventId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "AllowList_daoAddress_key" ON "AllowList"("daoAddress");
-
--- CreateIndex
-CREATE UNIQUE INDEX "AllowList_poapClaimCodeId_key" ON "AllowList"("poapClaimCodeId");
-
--- CreateIndex
 CREATE UNIQUE INDEX "POAPAuth_authToken_key" ON "POAPAuth"("authToken");
 
 -- AddForeignKey
 ALTER TABLE "POAPClaimCode" ADD CONSTRAINT "POAPClaimCode_eventId_fkey" FOREIGN KEY ("eventId") REFERENCES "POAPEvent"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "AllowList" ADD CONSTRAINT "AllowList_poapClaimCodeId_fkey" FOREIGN KEY ("poapClaimCodeId") REFERENCES "POAPClaimCode"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "POAPClaimCode" ADD CONSTRAINT "POAPClaimCode_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
