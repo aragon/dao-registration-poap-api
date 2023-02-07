@@ -14,3 +14,7 @@ export type ExternalPOAPClaimCodesResponse = {
   qr_hash: string;
   claimed: boolean;
 };
+
+export type HealthCheckResponse = {
+  status: 'healthy' | 'unhealthy';
+};
