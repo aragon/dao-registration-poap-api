@@ -1,0 +1,518 @@
+{
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "dao",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "creator",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "subdomain",
+          "type": "string"
+        }
+      ],
+      "name": "DAORegistered",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_dao",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_creator",
+          "type": "address"
+        },
+        {
+          "internalType": "string",
+          "name": "_subdomain",
+          "type": "string"
+        }
+      ],
+      "name": "emitTestEvent",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x608060405234801561001057600080fd5b5061021d806100206000396000f3fe608060405234801561001057600080fd5b506004361061002b5760003560e01c8063a9682a6a14610030575b600080fd5b61004361003e3660046100c7565b610045565b005b816001600160a01b0316836001600160a01b03167fbc0b11fe649bb4d67c7fb40936163e5423f45c3ae83fbd8f8f8c75e1a3fa97af836040516100889190610199565b60405180910390a3505050565b80356001600160a01b03811681146100ac57600080fd5b919050565b634e487b7160e01b600052604160045260246000fd5b6000806000606084860312156100dc57600080fd5b6100e584610095565b92506100f360208501610095565b9150604084013567ffffffffffffffff8082111561011057600080fd5b818601915086601f83011261012457600080fd5b813581811115610136576101366100b1565b604051601f8201601f19908116603f0116810190838211818310171561015e5761015e6100b1565b8160405282815289602084870101111561017757600080fd5b8260208601602083013760006020848301015280955050505050509250925092565b600060208083528351808285015260005b818110156101c6578581018301518582016040015282016101aa565b506000604082860101526040601f19601f830116850101925050509291505056fea2646970667358221220e4cbe68050186105603b45d4bdd1c257e9491e95e05edbdb1251854e8fbd211364736f6c63430008110033",
+    "sourceMap": "65:260:12:-:0;;;;;;;;;;;;;;;;;;;",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x608060405234801561001057600080fd5b506004361061002b5760003560e01c8063a9682a6a14610030575b600080fd5b61004361003e3660046100c7565b610045565b005b816001600160a01b0316836001600160a01b03167fbc0b11fe649bb4d67c7fb40936163e5423f45c3ae83fbd8f8f8c75e1a3fa97af836040516100889190610199565b60405180910390a3505050565b80356001600160a01b03811681146100ac57600080fd5b919050565b634e487b7160e01b600052604160045260246000fd5b6000806000606084860312156100dc57600080fd5b6100e584610095565b92506100f360208501610095565b9150604084013567ffffffffffffffff8082111561011057600080fd5b818601915086601f83011261012457600080fd5b813581811115610136576101366100b1565b604051601f8201601f19908116603f0116810190838211818310171561015e5761015e6100b1565b8160405282815289602084870101111561017757600080fd5b8260208601602083013760006020848301015280955050505050509250925092565b600060208083528351808285015260005b818110156101c6578581018301518582016040015282016101aa565b506000604082860101526040601f19601f830116850101925050509291505056fea2646970667358221220e4cbe68050186105603b45d4bdd1c257e9491e95e05edbdb1251854e8fbd211364736f6c63430008110033",
+    "sourceMap": "65:260:12:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;178:145;;;;;;:::i;:::-;;:::i;:::-;;;297:8;-1:-1:-1;;;;;277:41:12;291:4;-1:-1:-1;;;;;277:41:12;;307:10;277:41;;;;;;:::i;:::-;;;;;;;;178:145;;;:::o;14:173:14:-;82:20;;-1:-1:-1;;;;;131:31:14;;121:42;;111:70;;177:1;174;167:12;111:70;14:173;;;:::o;192:127::-;253:10;248:3;244:20;241:1;234:31;284:4;281:1;274:15;308:4;305:1;298:15;324:1070;411:6;419;427;480:2;468:9;459:7;455:23;451:32;448:52;;;496:1;493;486:12;448:52;519:29;538:9;519:29;:::i;:::-;509:39;;567:38;601:2;590:9;586:18;567:38;:::i;:::-;557:48;;656:2;645:9;641:18;628:32;679:18;720:2;712:6;709:14;706:34;;;736:1;733;726:12;706:34;774:6;763:9;759:22;749:32;;819:7;812:4;808:2;804:13;800:27;790:55;;841:1;838;831:12;790:55;877:2;864:16;899:2;895;892:10;889:36;;;905:18;;:::i;:::-;980:2;974:9;948:2;1034:13;;-1:-1:-1;;1030:22:14;;;1054:2;1026:31;1022:40;1010:53;;;1078:18;;;1098:22;;;1075:46;1072:72;;;1124:18;;:::i;:::-;1164:10;1160:2;1153:22;1199:2;1191:6;1184:18;1239:7;1234:2;1229;1225;1221:11;1217:20;1214:33;1211:53;;;1260:1;1257;1250:12;1211:53;1316:2;1311;1307;1303:11;1298:2;1290:6;1286:15;1273:46;1361:1;1356:2;1351;1343:6;1339:15;1335:24;1328:35;1382:6;1372:16;;;;;;;324:1070;;;;;:::o;1399:548::-;1511:4;1540:2;1569;1558:9;1551:21;1601:6;1595:13;1644:6;1639:2;1628:9;1624:18;1617:34;1669:1;1679:140;1693:6;1690:1;1687:13;1679:140;;;1788:14;;;1784:23;;1778:30;1754:17;;;1773:2;1750:26;1743:66;1708:10;;1679:140;;;1683:3;1868:1;1863:2;1854:6;1843:9;1839:22;1835:31;1828:42;1938:2;1931;1927:7;1922:2;1914:6;1910:15;1906:29;1895:9;1891:45;1887:54;1879:62;;;;1399:548;;;;:::o",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "emitTestEvent(address,address,string)": "a9682a6a"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"dao\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"creator\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"subdomain\",\"type\":\"string\"}],\"name\":\"DAORegistered\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_dao\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_creator\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"_subdomain\",\"type\":\"string\"}],\"name\":\"emitTestEvent\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/src/DAORegistry.sol\":\"DAORegistry\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":ds-test/=contracts/lib/forge-std/lib/ds-test/src/\",\":forge-std/=contracts/lib/forge-std/src/\",\":openzeppelin-contracts-v4.7.3/=contracts/lib/openzeppelin-contracts-v4.7.3/contracts/\",\":openzeppelin-contracts/=contracts/lib/openzeppelin-contracts/contracts/\"]},\"sources\":{\"contracts/src/DAORegistry.sol\":{\"keccak256\":\"0x479f48fca1e8c0b733f666cfa94b4427af0c97a8960ff0bfe5181e3c9b6c45b3\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://a8eeb35ad1b60fb75a3b32f1c38f298d6b4a5b201416397e60ff1aeed5cfb738\",\"dweb:/ipfs/QmWLVHtpQnGG32Aok5GKQ8XQZJNecGyj6a5CkVvauXNqkB\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.17+commit.8df45f5f"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "dao",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "creator",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "string",
+              "name": "subdomain",
+              "type": "string",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "DAORegistered",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "_dao",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "_creator",
+              "type": "address"
+            },
+            {
+              "internalType": "string",
+              "name": "_subdomain",
+              "type": "string"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "emitTestEvent"
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        ":ds-test/=contracts/lib/forge-std/lib/ds-test/src/",
+        ":forge-std/=contracts/lib/forge-std/src/",
+        ":openzeppelin-contracts-v4.7.3/=contracts/lib/openzeppelin-contracts-v4.7.3/contracts/",
+        ":openzeppelin-contracts/=contracts/lib/openzeppelin-contracts/contracts/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "contracts/src/DAORegistry.sol": "DAORegistry"
+      },
+      "libraries": {}
+    },
+    "sources": {
+      "contracts/src/DAORegistry.sol": {
+        "keccak256": "0x479f48fca1e8c0b733f666cfa94b4427af0c97a8960ff0bfe5181e3c9b6c45b3",
+        "urls": [
+          "bzz-raw://a8eeb35ad1b60fb75a3b32f1c38f298d6b4a5b201416397e60ff1aeed5cfb738",
+          "dweb:/ipfs/QmWLVHtpQnGG32Aok5GKQ8XQZJNecGyj6a5CkVvauXNqkB"
+        ],
+        "license": "UNLICENSED"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "contracts/src/DAORegistry.sol",
+    "id": 23364,
+    "exportedSymbols": {
+      "DAORegistry": [
+        23363
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "40:286:12",
+    "nodes": [
+      {
+        "id": 23338,
+        "nodeType": "PragmaDirective",
+        "src": "40:23:12",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "0.8",
+          ".17"
+        ]
+      },
+      {
+        "id": 23363,
+        "nodeType": "ContractDefinition",
+        "src": "65:260:12",
+        "nodes": [
+          {
+            "id": 23346,
+            "nodeType": "EventDefinition",
+            "src": "90:84:12",
+            "nodes": [],
+            "anonymous": false,
+            "eventSelector": "bc0b11fe649bb4d67c7fb40936163e5423f45c3ae83fbd8f8f8c75e1a3fa97af",
+            "name": "DAORegistered",
+            "nameLocation": "96:13:12",
+            "parameters": {
+              "id": 23345,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 23340,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "dao",
+                  "nameLocation": "126:3:12",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 23346,
+                  "src": "110:19:12",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 23339,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "110:7:12",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 23342,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "creator",
+                  "nameLocation": "147:7:12",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 23346,
+                  "src": "131:23:12",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 23341,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "131:7:12",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 23344,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "subdomain",
+                  "nameLocation": "163:9:12",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 23346,
+                  "src": "156:16:12",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 23343,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "156:6:12",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "109:64:12"
+            }
+          },
+          {
+            "id": 23362,
+            "nodeType": "FunctionDefinition",
+            "src": "178:145:12",
+            "nodes": [],
+            "body": {
+              "id": 23361,
+              "nodeType": "Block",
+              "src": "266:57:12",
+              "nodes": [],
+              "statements": [
+                {
+                  "eventCall": {
+                    "arguments": [
+                      {
+                        "id": 23356,
+                        "name": "_dao",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 23348,
+                        "src": "291:4:12",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "id": 23357,
+                        "name": "_creator",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 23350,
+                        "src": "297:8:12",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "id": 23358,
+                        "name": "_subdomain",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 23352,
+                        "src": "307:10:12",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      ],
+                      "id": 23355,
+                      "name": "DAORegistered",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 23346,
+                      "src": "277:13:12",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_address_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (address,address,string memory)"
+                      }
+                    },
+                    "id": 23359,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "277:41:12",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 23360,
+                  "nodeType": "EmitStatement",
+                  "src": "272:46:12"
+                }
+              ]
+            },
+            "functionSelector": "a9682a6a",
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "emitTestEvent",
+            "nameLocation": "187:13:12",
+            "parameters": {
+              "id": 23353,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 23348,
+                  "mutability": "mutable",
+                  "name": "_dao",
+                  "nameLocation": "209:4:12",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 23362,
+                  "src": "201:12:12",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 23347,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "201:7:12",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 23350,
+                  "mutability": "mutable",
+                  "name": "_creator",
+                  "nameLocation": "223:8:12",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 23362,
+                  "src": "215:16:12",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 23349,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "215:7:12",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 23352,
+                  "mutability": "mutable",
+                  "name": "_subdomain",
+                  "nameLocation": "247:10:12",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 23362,
+                  "src": "233:24:12",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 23351,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "233:6:12",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "200:58:12"
+            },
+            "returnParameters": {
+              "id": 23354,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "266:0:12"
+            },
+            "scope": 23363,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "DAORegistry",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          23363
+        ],
+        "name": "DAORegistry",
+        "nameLocation": "74:11:12",
+        "scope": 23364,
+        "usedErrors": []
+      }
+    ],
+    "license": "UNLICENSED"
+  },
+  "id": 12
+}
