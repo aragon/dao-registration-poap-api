@@ -1,15 +1,34 @@
-version: '3'
 services:
-  postgres:
-    container_name: nest-pg
-    image: postgres:latest
-    ports:
-      - '5432:5432'
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: .
+      # Only will build development stage from our dockerfile
+      target: development
     volumes:
-      - db:/var/lib/postgresql/data
+      - .:/usr/src/app
+      - ./usr/src/app/node_modules
     env_file:
-      - docker.env
+      - .env
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?schema=public
+    # Run a command against the development stage of the image
+    command: npm run start:dev
+    ports:
+      - 3000:3000
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - docker-nest-postgres:/var/lib/postgresql/data
 
 volumes:
-  db:
-    driver: local
+  docker-nest-postgres:
