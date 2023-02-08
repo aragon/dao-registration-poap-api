@@ -23,7 +23,11 @@ cp .env.example .env
 ## Building and running the app
 
 ```bash
-docker-compose up -d
+# build postgres and api
+docker compose up -d
+
+# apply any migrations to sync your db with the schema
+npm run migrate:sync
 ```
 
 You can test that everything worked by visiting http://localhost:3000/health. You should see a JSON response with the following content:
