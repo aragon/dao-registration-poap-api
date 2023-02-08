@@ -4,9 +4,9 @@ import {
   NotFoundException,
   UnprocessableEntityException,
 } from '@nestjs/common';
-import { PoapAuthService } from 'src/poap-auth/poap-auth.service';
-import { PoapService } from 'src/poap/poap.service';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PoapAuthService } from '../poap-auth/poap-auth.service';
+import { PoapService } from '../poap/poap.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { ImportPoapEventInput } from './inputs/import-poap-event.input';
 import { PoapEvent } from './poap-event.model';
 

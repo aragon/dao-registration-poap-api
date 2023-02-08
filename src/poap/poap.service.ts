@@ -26,6 +26,18 @@ export class PoapService {
     };
   }
 
+  async healthCheck() {
+    const { data } = await firstValueFrom(
+      this.httpService.get('/health-check', this.httpConfig).pipe(
+        catchError((error) => {
+          console.error(error);
+          throw 'An error happened!';
+        }),
+      ),
+    );
+    return data.status === 'healthy';
+  }
+
   async getQrCodesByEventId(
     poapEventId: number,
     authToken: string,
