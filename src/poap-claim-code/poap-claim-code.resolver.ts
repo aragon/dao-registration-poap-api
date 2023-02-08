@@ -1,4 +1,4 @@
-import { Args, Query, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { PoapClaimCode } from './poap-claim-code.model';
 import { PoapClaimCodeService } from './poap-claim-code.service';
 
@@ -6,8 +6,23 @@ import { PoapClaimCodeService } from './poap-claim-code.service';
 export class PoapClaimCodeResolver {
   constructor(private readonly poapClaimCodeService: PoapClaimCodeService) {}
 
-  @Query(() => [PoapClaimCode], { name: 'poapClaimCodes' })
-  async poapClaimCodes(@Args('userAddress') userAddress: string) {
-    return this.poapClaimCodeService.getClaimCodesForUser(userAddress);
+  @Query(() => Boolean, { name: 'canClaimPOAP' })
+  async canClaimPOAP(@Args('userAddress') userAddress: string) {
+    return this.poapClaimCodeService.canClaimPOAP(userAddress);
+  }
+
+  @Query(() => Boolean, { name: 'isMinted' })
+  async isMinted(@Args('qrHash') qrHash: string) {
+    return this.poapClaimCodeService.isMinted(qrHash);
+  }
+
+  @Query(() => PoapClaimCode, { name: 'mintedClaimCode' })
+  async mintedClaimCode(@Args('userAddress') userAddress: string) {
+    return this.poapClaimCodeService.mintedClaimCode(userAddress);
+  }
+
+  @Mutation(() => PoapClaimCode, { name: 'mintPOAP' })
+  async mintPOAP(@Args('userAddress') userAddress: string) {
+    return this.poapClaimCodeService.mintClaimCode(userAddress);
   }
 }

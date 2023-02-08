@@ -8,8 +8,11 @@ export class PoapClaimCode {
   @Field(() => String, { description: 'POAP QR Hash' })
   qrHash: string;
 
-  @Field(() => Boolean, { description: 'Whether or not it has been minted' })
-  minted: boolean;
+  @Field(() => Boolean, { description: 'Whether or not it has been assigned' })
+  isAssigned: boolean;
+
+  @Field(() => Boolean, { description: 'Whether or not it has been claimed' })
+  isMinted: boolean;
 
   @Field(() => String, { description: 'DAO Address' })
   daoAddress: string;

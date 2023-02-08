@@ -2,7 +2,7 @@
 # BUILD FOR LOCAL DEVELOPMENT
 ###################
 
-FROM node:18-alpine As development
+FROM node:18.14.0-alpine3.17 As development
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -28,7 +28,7 @@ USER node
 # BUILD FOR PRODUCTION
 ###################
 
-FROM node:18-alpine As build
+FROM node:18.14.0-alpine3.17 As build
 
 WORKDIR /usr/src/app
 

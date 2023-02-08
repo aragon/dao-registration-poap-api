@@ -3,9 +3,11 @@ import { PoapClaimCodeService } from './poap-claim-code.service';
 import { PoapClaimCodeResolver } from './poap-claim-code.resolver';
 import { PrismaModule } from '../prisma/prisma.module';
 import { UserModule } from '../user/user.module';
+import { PoapModule } from '../poap/poap.module';
+import { PoapAuthModule } from '../poap-auth/poap-auth.module';
 
 @Module({
-  imports: [PrismaModule, UserModule],
+  imports: [PrismaModule, UserModule, PoapModule, PoapAuthModule],
   providers: [PoapClaimCodeService, PoapClaimCodeResolver],
   exports: [PoapClaimCodeService],
 })
