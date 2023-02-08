@@ -26,7 +26,8 @@ CREATE TABLE "POAPClaimCode" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER,
-    "minted" BOOLEAN NOT NULL DEFAULT false,
+    "isAssigned" BOOLEAN NOT NULL DEFAULT false,
+    "isMinted" BOOLEAN NOT NULL DEFAULT false,
     "daoAddress" TEXT,
 
     CONSTRAINT "POAPClaimCode_pkey" PRIMARY KEY ("id")

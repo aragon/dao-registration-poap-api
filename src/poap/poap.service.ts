@@ -4,9 +4,10 @@ import { ConfigService } from '@nestjs/config';
 import { catchError, firstValueFrom } from 'rxjs';
 import { HttpConfig } from './poap-http-config';
 import {
-  ExternalAuthTokenResponse,
-  ExternalPOAPClaimCodesResponse,
-  ExternalPoapEventResponse,
+  ExternalAuthToken,
+  ExternalPOAPListClaimCode,
+  ExternalPoapEvent,
+  ExternalPOAPClaimCode,
 } from './types';
 
 @Injectable()
@@ -38,6 +39,63 @@ export class PoapService {
     return data.status === 'healthy';
   }
 
+  async claimQrCode(
+    qrHash: string,
+    address: string,
+    secret: string,
+    authToken: string,
+  ) {
+    const { data } = await firstValueFrom(
+      this.httpService
+        .post<ExternalPOAPClaimCode>(
+          `/actions/claim-qr`,
+          {
+            qr_hash: qrHash,
+            address,
+            secret,
+            sendEmail: true,
+          },
+          {
+            ...this.httpConfig,
+            headers: {
+              ...this.httpConfig.headers,
+              Authorization: `Bearer ${authToken}`,
+            },
+          },
+        )
+        .pipe(
+          catchError((error) => {
+            console.error(error);
+            throw 'An error happened!';
+          }),
+        ),
+    );
+    return data;
+  }
+
+  async getClaimQrCode(qrHash: string, authToken: string) {
+    const { data } = await firstValueFrom(
+      this.httpService
+        .get<ExternalPOAPClaimCode>(`/actions/claim-qr`, {
+          ...this.httpConfig,
+          headers: {
+            ...this.httpConfig.headers,
+            Authorization: `Bearer ${authToken}`,
+          },
+          params: {
+            qr_hash: qrHash,
+          },
+        })
+        .pipe(
+          catchError((error) => {
+            console.error(error);
+            throw 'An error happened!';
+          }),
+        ),
+    );
+    return data;
+  }
+
   async getQrCodesByEventId(
     poapEventId: number,
     authToken: string,
@@ -45,7 +103,7 @@ export class PoapService {
   ) {
     const { data } = await firstValueFrom(
       this.httpService
-        .post<ExternalPOAPClaimCodesResponse[]>(
+        .post<ExternalPOAPListClaimCode[]>(
           `/event/${poapEventId}/qr-codes`,
           {
             secret_code: secretCode,
@@ -71,10 +129,7 @@ export class PoapService {
   async getEventById(poapEventId: number) {
     const { data } = await firstValueFrom(
       this.httpService
-        .get<ExternalPoapEventResponse>(
-          `/events/id/${poapEventId}`,
-          this.httpConfig,
-        )
+        .get<ExternalPoapEvent>(`/events/id/${poapEventId}`, this.httpConfig)
         .pipe(
           catchError((error) => {
             console.error(error);
@@ -88,7 +143,7 @@ export class PoapService {
   async events() {
     const { data } = await firstValueFrom(
       this.httpService
-        .get<ExternalPoapEventResponse[]>('/paginated-events', this.httpConfig)
+        .get<ExternalPoapEvent[]>('/paginated-events', this.httpConfig)
         .pipe(
           catchError((error) => {
             console.error(error);
@@ -103,7 +158,7 @@ export class PoapService {
   async generateAuthToken(): Promise<string> {
     const { data } = await firstValueFrom(
       this.httpService
-        .post<ExternalAuthTokenResponse>(
+        .post<ExternalAuthToken>(
           '',
           {
             audience: this.configService.get<string>('POAP_API_AUDIENCE'),

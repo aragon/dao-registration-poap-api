@@ -1,4 +1,4 @@
-export type ExternalPoapEventResponse = {
+export type ExternalPoapEvent = {
   id: number;
   name: string;
   description: string;
@@ -6,15 +6,24 @@ export type ExternalPoapEventResponse = {
   image_url: string;
 };
 
-export type ExternalAuthTokenResponse = {
+export type ExternalAuthToken = {
   access_token: string;
 };
 
-export type ExternalPOAPClaimCodesResponse = {
+export type ExternalPOAPListClaimCode = {
   qr_hash: string;
   claimed: boolean;
 };
 
-export type HealthCheckResponse = {
+export type HealthCheck = {
   status: 'healthy' | 'unhealthy';
+};
+
+export type ExternalPOAPClaimCode = {
+  qr_hash: string;
+  claimed: boolean;
+  signer: string;
+  is_active: boolean;
+  tx_status: string;
+  secret: string;
 };

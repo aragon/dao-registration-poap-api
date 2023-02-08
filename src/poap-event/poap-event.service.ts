@@ -29,11 +29,9 @@ export class PoapEventService {
       throw new UnprocessableEntityException('Event already imported');
     }
 
-    const externalPoapEventResponse = await this.poapService.getEventById(
-      externalId,
-    );
+    const externalPoapEvent = await this.poapService.getEventById(externalId);
 
-    if (!externalPoapEventResponse) {
+    if (!externalPoapEvent) {
       throw new BadRequestException('Invalid event Id provided');
     }
 
@@ -49,7 +47,7 @@ export class PoapEventService {
       data: {
         secretCode,
         externalId,
-        image: externalPoapEventResponse.image_url,
+        image: externalPoapEvent.image_url,
         createdAt: new Date(),
       },
     });
