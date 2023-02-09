@@ -10,7 +10,7 @@ export type ExternalAuthToken = {
   access_token: string;
 };
 
-export type ExternalPOAPListClaimCode = {
+export type ExternalPoapListClaimCode = {
   qr_hash: string;
   claimed: boolean;
 };
@@ -19,7 +19,7 @@ export type HealthCheck = {
   status: 'healthy' | 'unhealthy';
 };
 
-export type ExternalPOAPClaimCode = {
+export type ExternalPoapClaimCode = {
   qr_hash: string;
   claimed: boolean;
   signer: string;

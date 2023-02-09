@@ -7,9 +7,9 @@ import { PoapClaimCodeService } from './poap-claim-code.service';
 export class PoapClaimCodeResolver {
   constructor(private readonly poapClaimCodeService: PoapClaimCodeService) {}
 
-  @Query(() => Boolean, { name: 'canClaimPOAP' })
-  async canClaimPOAP(@Args('userAddress') userAddress: string) {
-    return this.poapClaimCodeService.canClaimPOAP(userAddress);
+  @Query(() => Boolean, { name: 'canClaimPoap' })
+  async canClaimPoap(@Args('userAddress') userAddress: string) {
+    return this.poapClaimCodeService.canClaimPoap(userAddress);
   }
 
   @Query(() => Boolean, { name: 'isMinted' })
@@ -17,13 +17,13 @@ export class PoapClaimCodeResolver {
     return this.poapClaimCodeService.isMinted(qrHash);
   }
 
-  @Query(() => PoapClaimCode, { name: 'mintedClaimCode' })
+  @Query(() => PoapClaimCode, { name: 'mintedClaimCode', nullable: true })
   async mintedClaimCode(@Args('userAddress') userAddress: string) {
     return this.poapClaimCodeService.mintedClaimCode(userAddress);
   }
 
-  @Mutation(() => PoapClaimCode, { name: 'mintPOAP' })
-  async mintPOAP(@Args('userAddress') userAddress: string) {
+  @Mutation(() => PoapClaimCode, { name: 'mintPoap' })
+  async mintPoap(@Args('userAddress') userAddress: string) {
     return this.poapClaimCodeService.mintClaimCode(userAddress);
   }
 

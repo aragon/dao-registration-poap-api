@@ -5,7 +5,7 @@ import { PoapEventService } from '../poap-event/poap-event.service';
 export class PoapClaimCodeEventService {
   constructor(private readonly poapEventService: PoapEventService) {}
 
-  async getPOAPClaimCodeEvent(eventId: number) {
-    return this.poapEventService.getPOAPEventById(eventId);
+  async getPoapClaimCodeEvent(eventId: number) {
+    return this.poapEventService.getPoapEventById(eventId);
   }
 }
