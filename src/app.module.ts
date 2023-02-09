@@ -10,6 +10,7 @@ import { PoapAuthModule } from './poap-auth/poap-auth.module';
 import { UserModule } from './user/user.module';
 import { DefenderModule } from './defender/defender.module';
 import { PoapClaimCodeModule } from './poap-claim-code/poap-claim-code.module';
+import { PoapClaimCodeEventModule } from './poap-claim-code-event/poap-claim-code-event.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { PoapClaimCodeModule } from './poap-claim-code/poap-claim-code.module';
     UserModule,
     DefenderModule,
     PoapClaimCodeModule,
+    PoapClaimCodeEventModule,
   ],
   controllers: [AppController],
   providers: [AppService],
