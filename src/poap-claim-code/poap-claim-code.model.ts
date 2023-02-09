@@ -16,4 +16,6 @@ export class PoapClaimCode {
 
   @Field(() => String, { description: 'DAO Address' })
   daoAddress: string;
+
+  eventId: number;
 }

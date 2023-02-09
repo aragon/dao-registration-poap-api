@@ -57,8 +57,6 @@ export class PoapClaimCodeService {
       throw new UnprocessableEntityException('Claim code not found');
     }
 
-    externalClaimCode.tx_status = externalClaimCode.tx_status;
-
     return externalClaimCode.claimed;
   }
 
@@ -114,11 +112,6 @@ export class PoapClaimCodeService {
     if (!mintedClaimCode) {
       throw new UnprocessableEntityException('Error minting claim code');
     }
-
-    const updatedExternalClaimCode = await this.poapService.getClaimQrCode(
-      claimCode.qrHash,
-      authToken.authToken,
-    );
 
     await this.prismaService.pOAPClaimCode.update({
       where: {

@@ -65,6 +65,20 @@ export class PoapEventService {
     return createdEvent;
   }
 
+  async getPOAPEventById(id: number): Promise<PoapEvent> {
+    const poapEvent = await this.prismaService.pOAPEvent.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!poapEvent) {
+      throw new NotFoundException('Event not found');
+    }
+
+    return poapEvent;
+  }
+
   async getPOAPEvent(externalId: number): Promise<PoapEvent> {
     const poapEvent = await this.prismaService.pOAPEvent.findUnique({
       where: {
