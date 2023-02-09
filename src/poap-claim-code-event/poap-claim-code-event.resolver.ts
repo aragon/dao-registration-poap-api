@@ -11,7 +11,7 @@ export class PoapClaimCodeEventResolver {
 
   @ResolveField(() => PoapEvent)
   async event(@Parent() poapClaimCode: PoapClaimCode) {
-    return this.poapClaimCodeEventService.getPOAPClaimCodeEvent(
+    return this.poapClaimCodeEventService.getPoapClaimCodeEvent(
       poapClaimCode.eventId,
     );
   }

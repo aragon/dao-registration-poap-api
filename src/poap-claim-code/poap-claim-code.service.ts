@@ -14,16 +14,16 @@ export class PoapClaimCodeService {
   ) {}
 
   async getClaimCodeStatistics() {
-    const totalClaimCodes = await this.prismaService.pOAPClaimCode.count();
+    const totalClaimCodes = await this.prismaService.poapClaimCode.count();
 
     const totalClaimCodesAssigned =
-      await this.prismaService.pOAPClaimCode.count({
+      await this.prismaService.poapClaimCode.count({
         where: {
           isAssigned: true,
         },
       });
 
-    const totalClaimCodesMinted = await this.prismaService.pOAPClaimCode.count({
+    const totalClaimCodesMinted = await this.prismaService.poapClaimCode.count({
       where: {
         isMinted: true,
       },
@@ -36,7 +36,7 @@ export class PoapClaimCodeService {
     };
   }
 
-  async canClaimPOAP(userAddress: string) {
+  async canClaimPoap(userAddress: string) {
     return this.getAvailableClaimCodesForUser(userAddress).then(
       (claimCodes) => claimCodes.length > 0,
     );
@@ -45,7 +45,7 @@ export class PoapClaimCodeService {
   async mintedClaimCode(userAddress: string) {
     const user = await this.userService.findUserByAddressOrCreate(userAddress);
 
-    return this.prismaService.pOAPClaimCode.findFirst({
+    return this.prismaService.poapClaimCode.findFirst({
       where: {
         user,
         isMinted: true,
@@ -54,7 +54,7 @@ export class PoapClaimCodeService {
   }
 
   async isMinted(qrHash: string) {
-    const claimCode = await this.prismaService.pOAPClaimCode.findUnique({
+    const claimCode = await this.prismaService.poapClaimCode.findUnique({
       where: {
         qrHash,
       },
@@ -86,7 +86,7 @@ export class PoapClaimCodeService {
   async getAvailableClaimCodesForUser(address: string) {
     const user = await this.userService.findUserByAddressOrCreate(address);
 
-    return this.prismaService.pOAPClaimCode.findMany({
+    return this.prismaService.poapClaimCode.findMany({
       where: {
         userId: user.id,
         isAssigned: true,
@@ -136,7 +136,7 @@ export class PoapClaimCodeService {
       throw new UnprocessableEntityException('Error minting claim code');
     }
 
-    await this.prismaService.pOAPClaimCode.update({
+    await this.prismaService.poapClaimCode.update({
       where: {
         id: claimCode.id,
       },
@@ -146,7 +146,7 @@ export class PoapClaimCodeService {
       },
     });
 
-    return this.prismaService.pOAPClaimCode.findUnique({
+    return this.prismaService.poapClaimCode.findUnique({
       where: {
         id: claimCode.id,
       },
@@ -155,7 +155,7 @@ export class PoapClaimCodeService {
 
   async assignClaimCodeToUser(creatorAddress: string, daoAddress: string) {
     const existingDAOClaimCode =
-      await this.prismaService.pOAPClaimCode.findFirst({
+      await this.prismaService.poapClaimCode.findFirst({
         where: {
           daoAddress,
         },
@@ -169,7 +169,7 @@ export class PoapClaimCodeService {
       creatorAddress,
     );
 
-    const existingClaimCodes = await this.prismaService.pOAPClaimCode.findMany({
+    const existingClaimCodes = await this.prismaService.poapClaimCode.findMany({
       where: {
         user,
       },
@@ -183,7 +183,7 @@ export class PoapClaimCodeService {
       throw new Error('User already has an available claim code');
     }
 
-    const nextClaimCode = await this.prismaService.pOAPClaimCode.findFirst({
+    const nextClaimCode = await this.prismaService.poapClaimCode.findFirst({
       where: {
         userId: null,
         isAssigned: false,
@@ -203,7 +203,7 @@ export class PoapClaimCodeService {
       throw new Error('No more claim codes available for this user');
     }
 
-    await this.prismaService.pOAPClaimCode.update({
+    await this.prismaService.poapClaimCode.update({
       where: {
         id: nextClaimCode.id,
       },

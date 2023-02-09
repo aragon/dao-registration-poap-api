@@ -15,21 +15,21 @@ model User {
   id             Int             @id @default(autoincrement())
   address        String          @unique
   isAdmin        Boolean         @default(false)
-  poapClaimCodes POAPClaimCode[]
+  poapClaimCodes PoapClaimCode[]
 }
 
-model POAPEvent {
+model PoapEvent {
   id         Int             @id @default(autoincrement())
   externalId Int             @unique
   secretCode String
   image      String?
   createdAt  DateTime        @default(now())
-  claimCodes POAPClaimCode[]
+  claimCodes PoapClaimCode[]
 }
 
-model POAPClaimCode {
+model PoapClaimCode {
   id         Int       @id @default(autoincrement())
-  event      POAPEvent @relation(fields: [eventId], references: [id])
+  event      PoapEvent @relation(fields: [eventId], references: [id])
   eventId    Int
   qrHash     String    @unique
   createdAt  DateTime  @default(now())
@@ -44,7 +44,7 @@ model POAPClaimCode {
   @@index([userId], type: Hash)
 }
 
-model POAPAuth {
+model PoapAuth {
   id        Int      @id @default(autoincrement())
   authToken String   @unique
   createdAt DateTime @default(now())

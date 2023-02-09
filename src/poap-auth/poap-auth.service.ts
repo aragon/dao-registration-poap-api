@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { POAPAuth } from '@prisma/client';
+import { PoapAuth } from '@prisma/client';
 import { subHours } from 'date-fns';
 import { PoapService } from '../poap/poap.service';
 import { PrismaService } from '../prisma/prisma.service';
@@ -11,8 +11,8 @@ export class PoapAuthService {
     private readonly poapService: PoapService,
   ) {}
 
-  async getAuthToken(): Promise<POAPAuth> {
-    const authToken = await this.prismaService.pOAPAuth.findFirst({
+  async getAuthToken(): Promise<PoapAuth> {
+    const authToken = await this.prismaService.poapAuth.findFirst({
       orderBy: {
         createdAt: 'desc',
       },
@@ -32,7 +32,7 @@ export class PoapAuthService {
   private async createAuthToken() {
     const authToken = await this.poapService.generateAuthToken();
 
-    return this.prismaService.pOAPAuth.create({
+    return this.prismaService.poapAuth.create({
       data: {
         authToken,
         createdAt: new Date(),
@@ -43,7 +43,7 @@ export class PoapAuthService {
   private async refreshAuthToken(id: number) {
     const authToken = await this.poapService.generateAuthToken();
 
-    return this.prismaService.pOAPAuth.update({
+    return this.prismaService.poapAuth.update({
       where: {
         id,
       },

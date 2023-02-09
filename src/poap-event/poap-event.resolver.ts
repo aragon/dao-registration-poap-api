@@ -1,4 +1,4 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver, Int } from '@nestjs/graphql';
 import { ImportPoapEventInput } from './inputs/import-poap-event.input';
 import { PoapEvent } from './poap-event.model';
 import { PoapEventService } from './poap-event.service';
@@ -15,7 +15,9 @@ export class PoapEventResolver {
   }
 
   @Query(() => PoapEvent)
-  async poapEvent(@Args('externalId') externalId: number): Promise<PoapEvent> {
-    return this.poapEventService.getPOAPEvent(externalId);
+  async poapEvent(
+    @Args('externalId', { type: () => Int }) externalId: number,
+  ): Promise<PoapEvent> {
+    return this.poapEventService.getPoapEvent(externalId);
   }
 }

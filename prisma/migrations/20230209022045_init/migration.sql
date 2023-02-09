@@ -8,18 +8,18 @@ CREATE TABLE "User" (
 );
 
 -- CreateTable
-CREATE TABLE "POAPEvent" (
+CREATE TABLE "PoapEvent" (
     "id" SERIAL NOT NULL,
     "externalId" INTEGER NOT NULL,
     "secretCode" TEXT NOT NULL,
     "image" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-    CONSTRAINT "POAPEvent_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "PoapEvent_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "POAPClaimCode" (
+CREATE TABLE "PoapClaimCode" (
     "id" SERIAL NOT NULL,
     "eventId" INTEGER NOT NULL,
     "qrHash" TEXT NOT NULL,
@@ -30,42 +30,42 @@ CREATE TABLE "POAPClaimCode" (
     "isMinted" BOOLEAN NOT NULL DEFAULT false,
     "daoAddress" TEXT,
 
-    CONSTRAINT "POAPClaimCode_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "PoapClaimCode_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "POAPAuth" (
+CREATE TABLE "PoapAuth" (
     "id" SERIAL NOT NULL,
     "authToken" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-    CONSTRAINT "POAPAuth_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "PoapAuth_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_address_key" ON "User"("address");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "POAPEvent_externalId_key" ON "POAPEvent"("externalId");
+CREATE UNIQUE INDEX "PoapEvent_externalId_key" ON "PoapEvent"("externalId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "POAPClaimCode_qrHash_key" ON "POAPClaimCode"("qrHash");
+CREATE UNIQUE INDEX "PoapClaimCode_qrHash_key" ON "PoapClaimCode"("qrHash");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "POAPClaimCode_daoAddress_key" ON "POAPClaimCode"("daoAddress");
+CREATE UNIQUE INDEX "PoapClaimCode_daoAddress_key" ON "PoapClaimCode"("daoAddress");
 
 -- CreateIndex
-CREATE INDEX "POAPClaimCode_eventId_idx" ON "POAPClaimCode" USING HASH ("eventId");
+CREATE INDEX "PoapClaimCode_eventId_idx" ON "PoapClaimCode" USING HASH ("eventId");
 
 -- CreateIndex
-CREATE INDEX "POAPClaimCode_userId_idx" ON "POAPClaimCode" USING HASH ("userId");
+CREATE INDEX "PoapClaimCode_userId_idx" ON "PoapClaimCode" USING HASH ("userId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "POAPAuth_authToken_key" ON "POAPAuth"("authToken");
+CREATE UNIQUE INDEX "PoapAuth_authToken_key" ON "PoapAuth"("authToken");
 
 -- AddForeignKey
-ALTER TABLE "POAPClaimCode" ADD CONSTRAINT "POAPClaimCode_eventId_fkey" FOREIGN KEY ("eventId") REFERENCES "POAPEvent"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "PoapClaimCode" ADD CONSTRAINT "PoapClaimCode_eventId_fkey" FOREIGN KEY ("eventId") REFERENCES "PoapEvent"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "POAPClaimCode" ADD CONSTRAINT "POAPClaimCode_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "PoapClaimCode" ADD CONSTRAINT "PoapClaimCode_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
