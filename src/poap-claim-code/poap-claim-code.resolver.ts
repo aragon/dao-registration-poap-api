@@ -17,7 +17,7 @@ export class PoapClaimCodeResolver {
     return this.poapClaimCodeService.isMinted(qrHash);
   }
 
-  @Query(() => PoapClaimCode, { name: 'mintedClaimCode' })
+  @Query(() => PoapClaimCode, { name: 'mintedClaimCode', nullable: true })
   async mintedClaimCode(@Args('userAddress') userAddress: string) {
     return this.poapClaimCodeService.mintedClaimCode(userAddress);
   }
