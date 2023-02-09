@@ -5,9 +5,9 @@ import { catchError, firstValueFrom } from 'rxjs';
 import { HttpConfig } from './poap-http-config';
 import {
   ExternalAuthToken,
-  ExternalPOAPListClaimCode,
+  ExternalPoapListClaimCode,
   ExternalPoapEvent,
-  ExternalPOAPClaimCode,
+  ExternalPoapClaimCode,
 } from './types';
 
 @Injectable()
@@ -47,7 +47,7 @@ export class PoapService {
   ) {
     const { data } = await firstValueFrom(
       this.httpService
-        .post<ExternalPOAPClaimCode>(
+        .post<ExternalPoapClaimCode>(
           `/actions/claim-qr`,
           {
             qr_hash: qrHash,
@@ -76,7 +76,7 @@ export class PoapService {
   async getClaimQrCode(qrHash: string, authToken: string) {
     const { data } = await firstValueFrom(
       this.httpService
-        .get<ExternalPOAPClaimCode>(`/actions/claim-qr`, {
+        .get<ExternalPoapClaimCode>(`/actions/claim-qr`, {
           ...this.httpConfig,
           headers: {
             ...this.httpConfig.headers,
@@ -103,7 +103,7 @@ export class PoapService {
   ) {
     const { data } = await firstValueFrom(
       this.httpService
-        .post<ExternalPOAPListClaimCode[]>(
+        .post<ExternalPoapListClaimCode[]>(
           `/event/${poapEventId}/qr-codes`,
           {
             secret_code: secretCode,

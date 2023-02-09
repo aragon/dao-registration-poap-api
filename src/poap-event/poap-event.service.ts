@@ -19,7 +19,7 @@ export class PoapEventService {
   ) {}
 
   async importPoapEvent({ externalId, secretCode }: ImportPoapEventInput) {
-    const poapEvent = await this.prismaService.pOAPEvent.findUnique({
+    const poapEvent = await this.prismaService.poapEvent.findUnique({
       where: {
         externalId,
       },
@@ -43,7 +43,7 @@ export class PoapEventService {
       secretCode,
     );
 
-    const createdEvent = await this.prismaService.pOAPEvent.create({
+    const createdEvent = await this.prismaService.poapEvent.create({
       data: {
         secretCode,
         externalId,
@@ -54,7 +54,7 @@ export class PoapEventService {
 
     const unclaimedCodes = claimCodes.filter((claimCode) => !claimCode.claimed);
 
-    await this.prismaService.pOAPClaimCode.createMany({
+    await this.prismaService.poapClaimCode.createMany({
       data: unclaimedCodes.map((claimCode) => ({
         qrHash: claimCode.qr_hash,
         eventId: createdEvent.id,
@@ -65,8 +65,8 @@ export class PoapEventService {
     return createdEvent;
   }
 
-  async getPOAPEventById(id: number): Promise<PoapEvent> {
-    const poapEvent = await this.prismaService.pOAPEvent.findUnique({
+  async getPoapEventById(id: number): Promise<PoapEvent> {
+    const poapEvent = await this.prismaService.poapEvent.findUnique({
       where: {
         id,
       },
@@ -79,8 +79,8 @@ export class PoapEventService {
     return poapEvent;
   }
 
-  async getPOAPEvent(externalId: number): Promise<PoapEvent> {
-    const poapEvent = await this.prismaService.pOAPEvent.findUnique({
+  async getPoapEvent(externalId: number): Promise<PoapEvent> {
+    const poapEvent = await this.prismaService.poapEvent.findUnique({
       where: {
         externalId,
       },
