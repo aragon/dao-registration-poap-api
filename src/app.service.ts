@@ -10,7 +10,7 @@ export class AppService {
   ) {}
 
   getHello(): string {
-    return process.env.DEPLOYMENT_ENV;
+    return process.env.NODE_ENV;
   }
 
   async getHealth(): Promise<boolean> {
