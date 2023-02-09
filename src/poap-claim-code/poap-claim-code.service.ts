@@ -13,6 +13,29 @@ export class PoapClaimCodeService {
     private readonly poapAuthService: PoapAuthService,
   ) {}
 
+  async getClaimCodeStatistics() {
+    const totalClaimCodes = await this.prismaService.pOAPClaimCode.count();
+
+    const totalClaimCodesAssigned =
+      await this.prismaService.pOAPClaimCode.count({
+        where: {
+          isAssigned: true,
+        },
+      });
+
+    const totalClaimCodesMinted = await this.prismaService.pOAPClaimCode.count({
+      where: {
+        isMinted: true,
+      },
+    });
+
+    return {
+      totalClaimCodes,
+      totalClaimCodesAssigned,
+      totalClaimCodesMinted,
+    };
+  }
+
   async canClaimPOAP(userAddress: string) {
     return this.getAvailableClaimCodesForUser(userAddress).then(
       (claimCodes) => claimCodes.length > 0,

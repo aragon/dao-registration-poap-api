@@ -1,4 +1,5 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { PoapClaimCodeStatistics } from './poap-claim-code-statistics.model';
 import { PoapClaimCode } from './poap-claim-code.model';
 import { PoapClaimCodeService } from './poap-claim-code.service';
 
@@ -24,5 +25,10 @@ export class PoapClaimCodeResolver {
   @Mutation(() => PoapClaimCode, { name: 'mintPOAP' })
   async mintPOAP(@Args('userAddress') userAddress: string) {
     return this.poapClaimCodeService.mintClaimCode(userAddress);
+  }
+
+  @Query(() => PoapClaimCodeStatistics, { name: 'poapClaimCodeStatistics' })
+  async poapClaimCodeStatistics() {
+    return this.poapClaimCodeService.getClaimCodeStatistics();
   }
 }
