@@ -34,8 +34,6 @@ WORKDIR /usr/src/app
 
 COPY --chown=node:node package*.json ./
 
-RUN chown -R node_modules/.prisma node:node
-
 # In order to run `npm run build` we need access to the Nest CLI.
 # The Nest CLI is a dev dependency,
 # In the previous development stage we ran `npm ci` which installed all dependencies.
