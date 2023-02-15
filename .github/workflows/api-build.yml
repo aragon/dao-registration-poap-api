@@ -110,7 +110,7 @@ jobs:
         with:
           context: .
           #target: production
-          file: ./Dockerfile.roger
+          file: ./Dockerfile
           platforms: linux/amd64
           build-args: |
             COMMIT_SHA=${{ steps.vars2.outputs.SHA_SHORT }}
