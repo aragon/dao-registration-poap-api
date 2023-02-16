@@ -16,6 +16,8 @@ node_modules
 .env
 .env.local
 broadcast
+.env.test
+docker-compose.test.yml
 
 # IDE - VSCode
 .vscode/*
