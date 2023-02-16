@@ -48,11 +48,11 @@ jobs:
       - setup-and-build
     #if: contains(github.ref, 'refs/tags/dev/v')
     steps:
-      # - name: Checkout code
-      #   uses: actions/checkout@v3
-      #   with:
-      #     #ref: ${{ steps.vars1.outputs.TAG_VALUE }}
-      #     ref: ${{ needs.setup-and-build.outputs.ENVVAR_TAG_VALUE }}
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          #ref: ${{ steps.vars1.outputs.TAG_VALUE }}
+          ref: ${{ needs.setup-and-build.outputs.ENVVAR_TAG_VALUE }}
 
       # - name: Get Git short commit hash
       #   id: vars2
@@ -60,8 +60,8 @@ jobs:
 
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v2
-        with:
-          buildkitd-flags: --debug
+        # with:
+        #   buildkitd-flags: --debug
 
       - name: Get Docker metadata
         id: meta
