@@ -13,7 +13,7 @@ export class UserService {
     });
   }
 
-  async findUserByAddressOrCreate(address: string) {
+  async findOrCreateUserByAddress(address: string) {
     return this.prismaService.user.upsert({
       where: {
         address,

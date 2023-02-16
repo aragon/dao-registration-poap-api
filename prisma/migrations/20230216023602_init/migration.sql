@@ -1,10 +1,26 @@
+-- Enable citext in db
+CREATE EXTENSION citext;
+
+-- CreateEnum
+CREATE TYPE "PoapClaimCodeStatus" AS ENUM ('ASSIGNED', 'MINTED', 'ERROR', 'UNASSIGNED');
+
 -- CreateTable
 CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
-    "address" TEXT NOT NULL,
+    "address" CITEXT NOT NULL,
     "isAdmin" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Session" (
+    "id" SERIAL NOT NULL,
+    "expiresAt" TIMESTAMP(3) NOT NULL,
+    "signature" TEXT NOT NULL,
+    "userId" INTEGER NOT NULL,
+
+    CONSTRAINT "Session_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -14,8 +30,20 @@ CREATE TABLE "PoapEvent" (
     "secretCode" TEXT NOT NULL,
     "image" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "expiresAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "PoapEvent_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "PendingDAORegistrySync" (
+    "id" SERIAL NOT NULL,
+    "daoAddress" CITEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "userId" INTEGER,
+
+    CONSTRAINT "PendingDAORegistrySync_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -26,9 +54,8 @@ CREATE TABLE "PoapClaimCode" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER,
-    "isAssigned" BOOLEAN NOT NULL DEFAULT false,
-    "isMinted" BOOLEAN NOT NULL DEFAULT false,
-    "daoAddress" TEXT,
+    "status" "PoapClaimCodeStatus" NOT NULL DEFAULT 'UNASSIGNED',
+    "daoAddress" CITEXT,
 
     CONSTRAINT "PoapClaimCode_pkey" PRIMARY KEY ("id")
 );
@@ -47,7 +74,22 @@ CREATE TABLE "PoapAuth" (
 CREATE UNIQUE INDEX "User_address_key" ON "User"("address");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Session_signature_key" ON "Session"("signature");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Session_userId_key" ON "Session"("userId");
+
+-- CreateIndex
+CREATE INDEX "Session_userId_idx" ON "Session" USING HASH ("userId");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "PoapEvent_externalId_key" ON "PoapEvent"("externalId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "PendingDAORegistrySync_daoAddress_key" ON "PendingDAORegistrySync"("daoAddress");
+
+-- CreateIndex
+CREATE INDEX "PendingDAORegistrySync_userId_idx" ON "PendingDAORegistrySync" USING HASH ("userId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "PoapClaimCode_qrHash_key" ON "PoapClaimCode"("qrHash");
@@ -63,6 +105,12 @@ CREATE INDEX "PoapClaimCode_userId_idx" ON "PoapClaimCode" USING HASH ("userId")
 
 -- CreateIndex
 CREATE UNIQUE INDEX "PoapAuth_authToken_key" ON "PoapAuth"("authToken");
+
+-- AddForeignKey
+ALTER TABLE "Session" ADD CONSTRAINT "Session_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "PendingDAORegistrySync" ADD CONSTRAINT "PendingDAORegistrySync_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "PoapClaimCode" ADD CONSTRAINT "PoapClaimCode_eventId_fkey" FOREIGN KEY ("eventId") REFERENCES "PoapEvent"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

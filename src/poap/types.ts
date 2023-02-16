@@ -4,6 +4,7 @@ export type ExternalPoapEvent = {
   description: string;
   fancy_id: string;
   image_url: string;
+  expiry_date: string;
 };
 
 export type ExternalAuthToken = {

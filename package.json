@@ -39,7 +39,8 @@
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.2.0"
+    "rxjs": "^7.2.0",
+    "siwe": "^1.1.6"
   },
   "devDependencies": {
     "@nestjs/cli": "^9.0.0",
