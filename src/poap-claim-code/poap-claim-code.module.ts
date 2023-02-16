@@ -14,6 +14,7 @@ import { PoapEventModule } from '../poap-event/poap-event.module';
     PoapModule,
     PoapAuthModule,
     PoapEventModule,
+    UserModule,
   ],
   providers: [PoapClaimCodeService, PoapClaimCodeResolver],
   exports: [PoapClaimCodeService],

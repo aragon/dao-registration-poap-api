@@ -1,6 +1,7 @@
-import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { AuthGuard } from '../auth/auth.guard';
+import { User } from '@prisma/client';
+import { Auth } from '../auth/auth.decorator';
+import { AuthenticatedUser } from '../user/authenticated-user.decorator';
 import { PoapClaimCodeStatistics } from './poap-claim-code-statistics.model';
 import { PoapClaimCode } from './poap-claim-code.model';
 import { PoapClaimCodeService } from './poap-claim-code.service';
@@ -9,27 +10,30 @@ import { PoapClaimCodeService } from './poap-claim-code.service';
 export class PoapClaimCodeResolver {
   constructor(private readonly poapClaimCodeService: PoapClaimCodeService) {}
 
-  @UseGuards(AuthGuard)
+  @Auth()
   @Query(() => Boolean, { name: 'canClaimPoap' })
-  async canClaimPoap(@Args('userAddress') userAddress: string) {
-    return this.poapClaimCodeService.canClaimPoap(userAddress);
+  async canClaimPoap(@AuthenticatedUser() user: User) {
+    return this.poapClaimCodeService.canClaimPoap(user);
   }
 
   @Query(() => Boolean, { name: 'isMinted' })
-  async isMinted(@Args('qrHash') qrHash: string) {
+  async isMinted(
+    @AuthenticatedUser() user: User,
+    @Args('qrHash') qrHash: string,
+  ) {
     return this.poapClaimCodeService.isMinted(qrHash);
   }
 
-  @UseGuards(AuthGuard)
+  @Auth()
   @Query(() => PoapClaimCode, { name: 'mintedClaimCode', nullable: true })
-  async mintedClaimCode(@Args('userAddress') userAddress: string) {
-    return this.poapClaimCodeService.mintedClaimCode(userAddress);
+  async mintedClaimCode(@AuthenticatedUser() user: User) {
+    return this.poapClaimCodeService.mintedClaimCode(user.address);
   }
 
-  @UseGuards(AuthGuard)
+  @Auth()
   @Mutation(() => PoapClaimCode, { name: 'mintPoap' })
-  async mintPoap(@Args('userAddress') userAddress: string) {
-    return this.poapClaimCodeService.mintClaimCode(userAddress);
+  async mintPoap(@AuthenticatedUser() user: User) {
+    return this.poapClaimCodeService.mintClaimCode(user.address);
   }
 
   @Query(() => PoapClaimCodeStatistics, { name: 'poapClaimCodeStatistics' })

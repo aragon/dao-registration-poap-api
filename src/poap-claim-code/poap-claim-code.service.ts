@@ -1,5 +1,5 @@
 import { Injectable, UnprocessableEntityException } from '@nestjs/common';
-import { PoapClaimCodeStatus } from '@prisma/client';
+import { PoapClaimCodeStatus, User } from '@prisma/client';
 import { PoapAuthService } from '../poap-auth/poap-auth.service';
 import { PoapEventService } from '../poap-event/poap-event.service';
 import { PoapService } from '../poap/poap.service';
@@ -39,8 +39,8 @@ export class PoapClaimCodeService {
     };
   }
 
-  async canClaimPoap(userAddress: string) {
-    return this.getAvailableClaimCodesForUser(userAddress).then(
+  async canClaimPoap(user: User) {
+    return this.getAvailableClaimCodesForUser(user.address).then(
       (claimCodes) => claimCodes.length > 0,
     );
   }
