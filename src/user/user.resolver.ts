@@ -1,4 +1,12 @@
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { Headers, UseGuards } from '@nestjs/common';
+import {
+  Args,
+  Context,
+  GraphQLExecutionContext,
+  Mutation,
+  Resolver,
+} from '@nestjs/graphql';
+import { AuthGuard } from '../auth/auth.guard';
 import { User } from './user.model';
 import { UserService } from './user.service';
 
@@ -7,7 +15,12 @@ export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
   @Mutation(() => User)
-  async findOrCreateUser(@Args('address') address: string) {
-    return this.userService.findUserByAddressOrCreate(address);
+  @UseGuards(AuthGuard)
+  async findOrCreateUser(
+    @Context() context: GraphQLExecutionContext,
+    @Headers('message') message: string,
+    @Args('address') address: string,
+  ) {
+    return this.userService.findOrCreateUserByAddress(address);
   }
 }

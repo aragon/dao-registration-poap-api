@@ -43,12 +43,20 @@ export class PoapEventService {
       secretCode,
     );
 
+    const today = new Date();
+    const eventExpiryDate = new Date(externalPoapEvent.expiry_date);
+
+    if (today > eventExpiryDate) {
+      throw new UnprocessableEntityException('Event expired');
+    }
+
     const createdEvent = await this.prismaService.poapEvent.create({
       data: {
         secretCode,
         externalId,
         image: externalPoapEvent.image_url,
         createdAt: new Date(),
+        expiresAt: new Date(externalPoapEvent.expiry_date),
       },
     });
 
@@ -77,6 +85,22 @@ export class PoapEventService {
     }
 
     return poapEvent;
+  }
+
+  async getAllPoapEvents(): Promise<PoapEvent[]> {
+    return this.prismaService.poapEvent.findMany();
+  }
+
+  async getActivePoapEvents(): Promise<PoapEvent[]> {
+    const today = new Date();
+
+    return this.prismaService.poapEvent.findMany({
+      where: {
+        expiresAt: {
+          gt: today,
+        },
+      },
+    });
   }
 
   async getPoapEvent(externalId: number): Promise<PoapEvent> {

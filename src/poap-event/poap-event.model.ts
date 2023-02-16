@@ -13,4 +13,7 @@ export class PoapEvent {
 
   @Field(() => GraphQLISODateTime, { description: 'Creation date' })
   createdAt: Date;
+
+  @Field(() => GraphQLISODateTime, { description: 'Expiration date' })
+  expiresAt: Date;
 }

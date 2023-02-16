@@ -20,4 +20,14 @@ export class PoapEventResolver {
   ): Promise<PoapEvent> {
     return this.poapEventService.getPoapEvent(externalId);
   }
+
+  @Query(() => [PoapEvent])
+  async allPoapEvents(): Promise<PoapEvent[]> {
+    return this.poapEventService.getAllPoapEvents();
+  }
+
+  @Query(() => [PoapEvent])
+  async activePoapEvents(): Promise<PoapEvent[]> {
+    return this.poapEventService.getActivePoapEvents();
+  }
 }

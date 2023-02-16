@@ -1,7 +1,10 @@
+-- Enable citext in db
+CREATE EXTENSION citext;
+
 -- CreateTable
 CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
-    "address" TEXT NOT NULL,
+    "address" CITEXT NOT NULL,
     "isAdmin" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
@@ -28,7 +31,7 @@ CREATE TABLE "PoapClaimCode" (
     "userId" INTEGER,
     "isAssigned" BOOLEAN NOT NULL DEFAULT false,
     "isMinted" BOOLEAN NOT NULL DEFAULT false,
-    "daoAddress" TEXT,
+    "daoAddress" CITEXT,
 
     CONSTRAINT "PoapClaimCode_pkey" PRIMARY KEY ("id")
 );

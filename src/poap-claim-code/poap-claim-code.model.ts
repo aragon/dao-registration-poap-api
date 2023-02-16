@@ -1,4 +1,5 @@
 import { Field, ObjectType, Int } from '@nestjs/graphql';
+import { PoapClaimCodeStatus } from '@prisma/client';
 
 @ObjectType({ description: 'PoapClaimCode' })
 export class PoapClaimCode {
@@ -8,11 +9,8 @@ export class PoapClaimCode {
   @Field(() => String, { description: 'POAP QR Hash' })
   qrHash: string;
 
-  @Field(() => Boolean, { description: 'Whether or not it has been assigned' })
-  isAssigned: boolean;
-
-  @Field(() => Boolean, { description: 'Whether or not it has been claimed' })
-  isMinted: boolean;
+  @Field(() => String, { description: 'POAP Claim Code' })
+  status: PoapClaimCodeStatus;
 
   @Field(() => String, { description: 'DAO Address' })
   daoAddress: string;
