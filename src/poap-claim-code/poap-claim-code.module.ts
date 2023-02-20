@@ -6,6 +6,7 @@ import { UserModule } from '../user/user.module';
 import { PoapModule } from '../poap/poap.module';
 import { PoapAuthModule } from '../poap-auth/poap-auth.module';
 import { PoapEventModule } from '../poap-event/poap-event.module';
+import { PendingDaoRegistrySyncModule } from '../pending-dao-registry-sync/pending-dao-registry-sync.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { PoapEventModule } from '../poap-event/poap-event.module';
     PoapAuthModule,
     PoapEventModule,
     UserModule,
+    PendingDaoRegistrySyncModule,
   ],
   providers: [PoapClaimCodeService, PoapClaimCodeResolver],
   exports: [PoapClaimCodeService],

@@ -13,7 +13,8 @@ export class DefenderService {
             if (
               matchReason.signature?.includes(
                 'DAORegistered(address,address,string)',
-              )
+              ) &&
+              matchReason.params.address === '0x000'
             ) {
               const { dao, creator } = matchReason.params;
 
