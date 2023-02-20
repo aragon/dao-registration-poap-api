@@ -19,7 +19,7 @@ on:
       - '.vscode'
       - '.dockerignore'
       - 'docker.env'
-      - '.github/**'
+      # - '.github/**'
 
 jobs:
   setup-and-build:
@@ -62,9 +62,11 @@ jobs:
         #   #ref: ${{ steps.vars1.outputs.TAG_VALUE }}
         #   ref: ${{ needs.setup-and-build.outputs.ENVVAR_TAG_VALUE }}
 
-      - name: Get Git short commit hash
+      - name: Get git hash and timestamp in seconds
         id: vars2
-        run: echo "GIT_HASH_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+        run: |
+          echo "GIT_HASH_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+          echo "DATE_IN_SECS=$(date +%s)" >> $GITHUB_OUTPUT
 
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v2
@@ -80,8 +82,13 @@ jobs:
           flavor: |
             latest=${{ github.ref == 'refs/heads/main' }}
           tags: |
-            type=ref,event=branch
-            type=sha
+            type=raw,value=commit1-{{sha}},enable=${{ github.ref_type != 'tag' }}
+            type=sha,event=branch,prefix=commit2-,format=short,enable=${{ github.ref_type != 'tag' }}
+
+      - name: Show docker tags and labels
+        run: |
+          echo "TAGS: ${{ steps.meta.outputs.tags }}"
+          echo "LABELS: ${{ steps.meta.outputs.labels }}"
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v2
@@ -96,12 +103,15 @@ jobs:
         with:
           context: .
           file: ./Dockerfile.prod
-          platforms: linux/amd64
+          #platforms: linux/amd64
           build-args: |
              COMMIT_SHA=${{ steps.vars2.outputs.GIT_HASH_SHORT }}
              ENVIRONMENT=development
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          tags: |
+            ghcr.io/${{ github.repository }}:develop
+            ghcr.io/${{ github.repository }}:develop-${{ steps.vars2.outputs.DATE_IN_SECS }}
+            ghcr.io/${{ github.repository }}:commit-hash-${{ steps.vars2.outputs.GIT_HASH_SHORT }}
+          labels: ${{ steps.meta.outputs.labels }}
