@@ -5,13 +5,15 @@ import {
   Injectable,
 } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql';
-import { AuthService } from './auth.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(@Inject(AuthService) private authService: AuthService) {}
+  constructor(private isAdmin: boolean) {}
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const ctx = GqlExecutionContext.create(context);
-    return !!ctx.getContext().req.user;
+    return (
+      !!ctx.getContext().req.user &&
+      (!this.isAdmin || ctx.getContext().req.user.isAdmin)
+    );
   }
 }

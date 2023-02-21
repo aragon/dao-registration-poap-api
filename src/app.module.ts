@@ -13,6 +13,9 @@ import { PoapClaimCodeModule } from './poap-claim-code/poap-claim-code.module';
 import { PoapClaimCodeEventModule } from './poap-claim-code-event/poap-claim-code-event.module';
 import { AuthModule } from './auth/auth.module';
 import { AuthMiddleware } from './user/user.middleware';
+import { AdminModule } from './admin/admin.module';
+import { PendingDaoRegistrySyncModule } from './pending-dao-registry-sync/pending-dao-registry-sync.module';
+import { StatisticsModule } from './statistics/statistics.module';
 
 @Module({
   imports: [
@@ -39,6 +42,9 @@ import { AuthMiddleware } from './user/user.middleware';
     PoapClaimCodeModule,
     PoapClaimCodeEventModule,
     AuthModule,
+    AdminModule,
+    PendingDaoRegistrySyncModule,
+    StatisticsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

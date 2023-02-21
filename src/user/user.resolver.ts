@@ -9,7 +9,7 @@ import { UserService } from './user.service';
 export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
-  @Auth()
+  @Auth({ isAdmin: true })
   @Mutation(() => User)
   async findOrCreateUser(@AuthenticatedUser() authUser: PrismaUser) {
     return this.userService.findOrCreateUserByAddress(authUser.address);
