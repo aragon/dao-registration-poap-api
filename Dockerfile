@@ -67,4 +67,4 @@ COPY --chown=node:node --from=build /usr/src/app/node_modules ./node_modules
 COPY --chown=node:node --from=build /usr/src/app/dist ./dist
 
 # Start the server using the production build
-CMD ["npm", "run", "start:migrate:dev"]
+CMD ["npm", "run", "start:migrate:prod"]
