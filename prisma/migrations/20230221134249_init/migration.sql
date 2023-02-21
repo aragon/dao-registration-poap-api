@@ -1,5 +1,7 @@
--- Enable citext in db
-CREATE EXTENSION citext;
+CREATE EXTENSION IF NOT EXISTS "citext";
+
+-- CreateEnum
+CREATE TYPE "ErrorLocation" AS ENUM ('ASSIGN', 'CLAIM');
 
 -- CreateEnum
 CREATE TYPE "PoapClaimCodeStatus" AS ENUM ('ASSIGNED', 'MINTED', 'ERROR', 'UNASSIGNED');
@@ -42,6 +44,8 @@ CREATE TABLE "PendingDAORegistrySync" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "userId" INTEGER,
+    "errorLocation" "ErrorLocation",
+    "isSynced" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "PendingDAORegistrySync_pkey" PRIMARY KEY ("id")
 );
@@ -96,6 +100,9 @@ CREATE UNIQUE INDEX "PoapClaimCode_qrHash_key" ON "PoapClaimCode"("qrHash");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "PoapClaimCode_daoAddress_key" ON "PoapClaimCode"("daoAddress");
+
+-- CreateIndex
+CREATE INDEX "PoapClaimCode_daoAddress_idx" ON "PoapClaimCode" USING HASH ("daoAddress");
 
 -- CreateIndex
 CREATE INDEX "PoapClaimCode_eventId_idx" ON "PoapClaimCode" USING HASH ("eventId");
