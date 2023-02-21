@@ -6,13 +6,11 @@ import { PoapAuthService } from '../poap-auth/poap-auth.service';
 import { PoapEventService } from '../poap-event/poap-event.service';
 import { PoapService } from '../poap/poap.service';
 import { PrismaService } from '../prisma/prisma.service';
-import { UserService } from '../user/user.service';
 
 @Injectable()
 export class PoapClaimCodeService {
   constructor(
     private readonly prismaService: PrismaService,
-    private readonly userService: UserService,
     private readonly poapService: PoapService,
     private readonly poapAuthService: PoapAuthService,
     private readonly poapEventService: PoapEventService,
@@ -44,29 +42,6 @@ export class PoapClaimCodeService {
         status: PoapClaimCodeStatus.UNASSIGNED,
       },
     });
-  }
-
-  async getClaimCodeStatistics() {
-    const totalClaimCodes = await this.prismaService.poapClaimCode.count();
-
-    const totalClaimCodesAssigned =
-      await this.prismaService.poapClaimCode.count({
-        where: {
-          status: PoapClaimCodeStatus.ASSIGNED,
-        },
-      });
-
-    const totalClaimCodesMinted = await this.prismaService.poapClaimCode.count({
-      where: {
-        status: PoapClaimCodeStatus.MINTED,
-      },
-    });
-
-    return {
-      totalClaimCodes,
-      totalClaimCodesAssigned,
-      totalClaimCodesMinted,
-    };
   }
 
   async canClaimPoap(user: User) {
@@ -113,9 +88,7 @@ export class PoapClaimCodeService {
     });
   }
 
-  async mintClaimCode(address: string) {
-    const user = await this.userService.findOrCreateUserByAddress(address);
-
+  async mintClaimCode(user: User) {
     const [claimCode] = await this.getAssignedCodesForUser(user);
 
     if (!claimCode) {
@@ -136,7 +109,7 @@ export class PoapClaimCodeService {
     }
 
     if (externalClaimCode.claimed) {
-      const status = addressMatch(externalClaimCode.signer, address)
+      const status = addressMatch(externalClaimCode.signer, user.address)
         ? 'MINTED'
         : 'ERROR';
 
@@ -168,7 +141,7 @@ export class PoapClaimCodeService {
 
     const mintedClaimCode = await this.poapService.claimQrCode(
       claimCode.qrHash,
-      address,
+      user.address,
       externalClaimCode.secret,
       authToken.authToken,
     );
@@ -193,7 +166,7 @@ export class PoapClaimCodeService {
     });
   }
 
-  async assignClaimCodeToUser(creatorAddress: string, daoAddress: string) {
+  async assignClaimCodeToUser(user: User, daoAddress: string) {
     const existingDAOClaimCode =
       await this.prismaService.poapClaimCode.findFirst({
         where: {
@@ -204,10 +177,6 @@ export class PoapClaimCodeService {
     if (existingDAOClaimCode) {
       throw new Error('DAO already has a claim code');
     }
-
-    const user = await this.userService.findOrCreateUserByAddress(
-      creatorAddress,
-    );
 
     const existingClaimCodes = await this.prismaService.poapClaimCode.findMany({
       where: {
@@ -298,6 +267,17 @@ export class PoapClaimCodeService {
         userId: user.id,
         status: PoapClaimCodeStatus.ASSIGNED,
         daoAddress,
+      },
+    });
+
+    //  If there is a pending sync for this user, remove it
+    await this.pendingDaoRegistrySyncService.resolvePendingDaoRegistrySyncs(
+      daoAddress,
+    );
+
+    return this.prismaService.poapClaimCode.findUnique({
+      where: {
+        id: nextClaimCode.id,
       },
     });
   }

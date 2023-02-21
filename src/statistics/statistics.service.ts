@@ -27,17 +27,20 @@ export class StatisticsService {
     const groupedActiveClaimCodes =
       await this.poapClaimCodeService.getGroupedActiveClaimCodesCountByStatus();
 
-    const availableClaimCodesCount = groupedActiveClaimCodes.find(
-      (group) => group.status === PoapClaimCodeStatus.UNASSIGNED,
-    )._count.qrHash;
+    const availableClaimCodesCount =
+      groupedActiveClaimCodes.find(
+        (group) => group.status === PoapClaimCodeStatus.UNASSIGNED,
+      )?._count?.qrHash ?? 0;
 
-    const assignedClaimCodesCount = groupedActiveClaimCodes.find(
-      (group) => group.status === PoapClaimCodeStatus.ASSIGNED,
-    )._count.qrHash;
+    const assignedClaimCodesCount =
+      groupedActiveClaimCodes.find(
+        (group) => group.status === PoapClaimCodeStatus.ASSIGNED,
+      )?._count?.qrHash ?? 0;
 
-    const mintedClaimCodesCount = groupedActiveClaimCodes.find(
-      (group) => group.status === PoapClaimCodeStatus.MINTED,
-    )._count.qrHash;
+    const mintedClaimCodesCount =
+      groupedActiveClaimCodes.find(
+        (group) => group.status === PoapClaimCodeStatus.MINTED,
+      )?._count?.qrHash ?? 0;
 
     const today = new Date();
 
@@ -48,9 +51,9 @@ export class StatisticsService {
     );
 
     const expiringClaimCodesCount =
-      await this.poapClaimCodeService.getAvailableClaimCodesCountByEventIds(
+      (await this.poapClaimCodeService.getAvailableClaimCodesCountByEventIds(
         expiringSoonEvents.map((event) => event.id),
-      );
+      )) ?? 0;
 
     const pendingDaoRegistrySyncs =
       await this.pendingDaoRegistrySyncService.getPendingDaoRegistrySyncs();

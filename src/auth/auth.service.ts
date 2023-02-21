@@ -2,14 +2,16 @@ import { Injectable } from '@nestjs/common';
 import { generateNonce, SiweMessage } from 'siwe';
 import { PrismaService } from '../prisma/prisma.service';
 import { UserService } from '../user/user.service';
-import { SiweSessionInput } from './inputs/SiweSession.input';
+import { SiweSessionInput } from './inputs/siwe-session.input';
 import { addHours } from 'date-fns';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly userService: UserService,
     private readonly prismaService: PrismaService,
+    private readonly configService: ConfigService,
   ) {}
 
   getNonce() {
@@ -24,7 +26,7 @@ export class AuthService {
 
       const expirationDate = addHours(
         new Date(siweMessage.issuedAt),
-        parseInt(process.env.SESSION_DURATION_HOURS),
+        this.configService.get<number>('SIWE_SESSION_EXPIRATION_HOURS', 24),
       );
 
       if (expirationDate < new Date()) {

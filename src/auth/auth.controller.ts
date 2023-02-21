@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { SiweSessionInput } from './inputs/SiweSession.input';
+import { SiweSessionInput } from './inputs/siwe-session.input';
 
 @Controller('auth')
 export class AuthController {

@@ -22,6 +22,7 @@ interface DefenderWebhookBody {
 
 interface DefenderWebhookEvent {
   matchReasons: DefenderWebhookMatchReason[];
+  sentinel: DefenderWebhookSentinel;
 }
 
 /*
@@ -47,4 +48,9 @@ interface DefenderWebhookMatchReason {
   params: {
     [key: string]: string;
   };
+}
+
+interface DefenderWebhookSentinel {
+  addresses: string[];
+  network: string;
 }

@@ -33,11 +33,6 @@ export class PoapClaimCodeResolver {
   @Auth()
   @Mutation(() => PoapClaimCode, { name: 'mintPoap' })
   async mintPoap(@AuthenticatedUser() user: User) {
-    return this.poapClaimCodeService.mintClaimCode(user.address);
-  }
-
-  @Query(() => PoapClaimCodeStatistics, { name: 'poapClaimCodeStatistics' })
-  async poapClaimCodeStatistics() {
-    return this.poapClaimCodeService.getClaimCodeStatistics();
+    return this.poapClaimCodeService.mintClaimCode(user);
   }
 }

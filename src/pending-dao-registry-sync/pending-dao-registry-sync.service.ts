@@ -17,6 +17,25 @@ export class PendingDaoRegistrySyncService {
     });
   }
 
+  async getPendingDaoRegistrySyncByDaoAddress(daoAddress: string) {
+    return this.prismaService.pendingDAORegistrySync.findMany({
+      where: {
+        daoAddress,
+      },
+    });
+  }
+
+  async resolvePendingDaoRegistrySyncs(daoAddress: string) {
+    return this.prismaService.pendingDAORegistrySync.updateMany({
+      where: {
+        daoAddress,
+      },
+      data: {
+        isSynced: true,
+      },
+    });
+  }
+
   async findOrCreatePendingDaoRegistrySync(
     user: User,
     daoAddress: string,

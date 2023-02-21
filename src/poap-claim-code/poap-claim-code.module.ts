@@ -15,7 +15,6 @@ import { PendingDaoRegistrySyncModule } from '../pending-dao-registry-sync/pendi
     PoapModule,
     PoapAuthModule,
     PoapEventModule,
-    UserModule,
     PendingDaoRegistrySyncModule,
   ],
   providers: [PoapClaimCodeService, PoapClaimCodeResolver],
