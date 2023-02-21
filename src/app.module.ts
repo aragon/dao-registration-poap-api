@@ -28,7 +28,7 @@ import { StatisticsModule } from './statistics/statistics.module';
       introspection: process.env.NODE_ENV !== 'production',
       persistedQueries: false,
       cors: {
-        origin: _corsOrigin(),
+        origin: corsOrigin(),
         credentials: true,
       },
     }),
@@ -55,7 +55,9 @@ export class AppModule implements NestModule {
   }
 }
 
-function _corsOrigin() {
-  // Disable localhost in production
-  return [...(process.env.NODE_ENV !== 'production' ? [/localhost:3001/] : [])];
+export function corsOrigin() {
+  return [
+    /\.aragon\.org$/,
+    ...(process.env.NODE_ENV !== 'production' ? [/localhost:3001/] : []),
+  ];
 }
