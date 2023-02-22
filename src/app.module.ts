@@ -58,6 +58,6 @@ export class AppModule implements NestModule {
 export function corsOrigin() {
   return [
     /\.aragon\.org$/,
-    ...(process.env.NODE_ENV !== 'production' ? [/localhost:3001/] : []),
+    ...(process.env.NODE_ENV !== 'production' ? [/localhost:\d{4}/] : []),
   ];
 }
