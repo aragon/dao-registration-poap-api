@@ -1,17 +1,32 @@
 ---
-name: api-build
+name: api-build-prod
 
 on:
   workflow_dispatch:
   push:
-    branches:
-      #- develop
-      - test
+    # branches:
+    #   - develop
     tags:
       - "v[0-9]+.[0-9]+.[0-9]+"
-  pull_request:
-    branches:
-      - main
+    paths-ignore:
+      - 'README.md'
+      - 'Dockerfile*'
+      - '.env*'
+      - '.vscode'
+      - '.dockerignore'
+      - 'docker.env'
+      # - '.github/**'
+  # pull_request:
+  #   branches:
+  #     - main
+  #   paths-ignore:
+  #     - 'README.md'
+  #     - 'Dockerfile*'
+  #     - '.env*'
+  #     - '.vscode'
+  #     - '.dockerignore'
+  #     - 'docker.env'
+  #     # - '.github/**'
 
 jobs:
   setup-and-build:
