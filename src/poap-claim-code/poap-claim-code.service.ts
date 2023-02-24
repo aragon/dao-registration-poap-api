@@ -89,11 +89,32 @@ export class PoapClaimCodeService {
   }
 
   async mintClaimCode(user: User) {
-    const [claimCode] = await this.getAssignedCodesForUser(user);
+    const allClaimCodesForUser =
+      await this.prismaService.poapClaimCode.findMany({
+        where: {
+          userId: user.id,
+        },
+        orderBy: {
+          id: 'asc',
+        },
+      });
+
+    const claimCode = allClaimCodesForUser.find(
+      (code) =>
+        code.status === PoapClaimCodeStatus.ASSIGNED && !code.daoAddress,
+    );
+
+    const mintedCode = await this.mintedClaimCode(user);
+
+    if (!claimCode && mintedCode) {
+      throw new UnprocessableEntityException(
+        'Your POAP has already been claimed!',
+      );
+    }
 
     if (!claimCode) {
       throw new UnprocessableEntityException(
-        'No claim codes available for this user',
+        "Make sure you're using the right wallet address. Only wallet addresses whose DAO was made with Aragon can claim POAPs.",
       );
     }
 

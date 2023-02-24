@@ -8,9 +8,9 @@ import { ImportPoapEventInput } from './inputs/import-poap-event.input';
 import { PoapEventService } from '../poap-event/poap-event.service';
 import { PoapService } from '../poap/poap.service';
 import { PrismaService } from '../prisma/prisma.service';
-import { PendingDaoRegistrySyncService } from '../pending-dao-registry-sync/pending-dao-registry-sync.service';
 import { PoapClaimCodeService } from '../poap-claim-code/poap-claim-code.service';
 import { ReassignPendingSyncResult } from './reassign-pending-sync-result.model';
+import { UserService } from '../user/user.service';
 
 @Injectable()
 export class AdminService {
@@ -19,8 +19,8 @@ export class AdminService {
     private readonly poapService: PoapService,
     private readonly poapAuthService: PoapAuthService,
     private readonly poapEventService: PoapEventService,
-    private readonly pendingSyncService: PendingDaoRegistrySyncService,
     private readonly poapClaimCodeService: PoapClaimCodeService,
+    private readonly userService: UserService,
   ) {}
 
   async importPoapEvent({ externalId, secretCode }: ImportPoapEventInput) {
@@ -78,12 +78,18 @@ export class AdminService {
 
   async reassingPendingSyncAttempts(
     pendingCodesCount: number,
+    creatorAddress: string = undefined,
   ): Promise<ReassignPendingSyncResult> {
+    const creator = creatorAddress
+      ? await this.userService.findOrCreateUserByAddress(creatorAddress)
+      : undefined;
+
     const pendingSyncs =
       await this.prismaService.pendingDAORegistrySync.findMany({
         take: pendingCodesCount,
         where: {
           isSynced: false,
+          ...(creator && { userId: creator.id }),
         },
         include: {
           user: true,
