@@ -2,7 +2,6 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { User } from '@prisma/client';
 import { Auth } from '../auth/auth.decorator';
 import { AuthenticatedUser } from '../user/authenticated-user.decorator';
-import { PoapClaimCodeStatistics } from './poap-claim-code-statistics.model';
 import { PoapClaimCode } from './poap-claim-code.model';
 import { PoapClaimCodeService } from './poap-claim-code.service';
 

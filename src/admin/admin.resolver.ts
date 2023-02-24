@@ -25,8 +25,13 @@ export class AdminResolver {
   @Mutation(() => ReassignPendingSyncResult)
   async reassignPendingClaimCodes(
     @Args('count', { type: () => Int }) pendingCodesCount: number,
+    @Args('creatorAddress', { type: () => String, nullable: true })
+    creatorAddress: string,
   ): Promise<ReassignPendingSyncResult> {
-    return this.adminService.reassingPendingSyncAttempts(pendingCodesCount);
+    return this.adminService.reassingPendingSyncAttempts(
+      pendingCodesCount,
+      creatorAddress,
+    );
   }
 
   @Auth({ isAdmin: true })
