@@ -9,10 +9,9 @@ import { PoapClaimCodeService } from './poap-claim-code.service';
 export class PoapClaimCodeResolver {
   constructor(private readonly poapClaimCodeService: PoapClaimCodeService) {}
 
-  @Auth()
   @Query(() => Boolean, { name: 'canClaimPoap' })
-  async canClaimPoap(@AuthenticatedUser() user: User) {
-    return this.poapClaimCodeService.canClaimPoap(user);
+  async canClaimPoap(@Args('address') address: string) {
+    return this.poapClaimCodeService.canClaimPoap(address);
   }
 
   @Query(() => Boolean, { name: 'isMinted' })

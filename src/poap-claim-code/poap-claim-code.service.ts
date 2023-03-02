@@ -8,6 +8,7 @@ import { PoapAuthService } from '../poap-auth/poap-auth.service';
 import { PoapEventService } from '../poap-event/poap-event.service';
 import { PoapService } from '../poap/poap.service';
 import { PrismaService } from '../prisma/prisma.service';
+import { UserService } from '../user/user.service';
 
 @Injectable()
 export class PoapClaimCodeService {
@@ -17,6 +18,7 @@ export class PoapClaimCodeService {
     private readonly poapAuthService: PoapAuthService,
     private readonly poapEventService: PoapEventService,
     private readonly pendingDaoRegistrySyncService: PendingDaoRegistrySyncService,
+    private readonly userService: UserService,
   ) {}
 
   async getGroupedActiveClaimCodesCountByStatus() {
@@ -46,10 +48,9 @@ export class PoapClaimCodeService {
     });
   }
 
-  async canClaimPoap(user: User) {
-    return this.getAssignedCodesForUser(user).then(
-      (claimCodes) => claimCodes.length > 0,
-    );
+  async canClaimPoap(address: string) {
+    const user = await this.userService.findOrCreateUserByAddress(address);
+    !!(await this.validatedNextClaimCode(user));
   }
 
   async mintedClaimCode(user: User) {
@@ -91,32 +92,7 @@ export class PoapClaimCodeService {
   }
 
   async mintClaimCode(user: User) {
-    const allClaimCodesForUser =
-      await this.prismaService.poapClaimCode.findMany({
-        where: {
-          userId: user.id,
-        },
-        orderBy: {
-          id: 'asc',
-        },
-      });
-
-    const claimCode = allClaimCodesForUser.find(
-      (code) =>
-        code.status === PoapClaimCodeStatus.ASSIGNED && !code.daoAddress,
-    );
-
-    const mintedCode = await this.mintedClaimCode(user);
-
-    if (!claimCode && mintedCode) {
-      throw new AlreadyMintedError('Your POAP has already been claimed!');
-    }
-
-    if (!claimCode) {
-      throw new InvalidAddressError(
-        "Make sure you're using the right wallet address. Only wallet addresses whose DAO was made with Aragon can claim POAPs.",
-      );
-    }
+    const claimCode = await this.validatedNextClaimCode(user);
 
     const authToken = await this.poapAuthService.getAuthToken();
 
@@ -301,5 +277,36 @@ export class PoapClaimCodeService {
         id: nextClaimCode.id,
       },
     });
+  }
+
+  private async validatedNextClaimCode(user: User) {
+    const allClaimCodesForUser =
+      await this.prismaService.poapClaimCode.findMany({
+        where: {
+          userId: user.id,
+        },
+        orderBy: {
+          id: 'asc',
+        },
+      });
+
+    const claimCode = allClaimCodesForUser.find(
+      (code) =>
+        code.status === PoapClaimCodeStatus.ASSIGNED && !code.daoAddress,
+    );
+
+    const mintedCode = await this.mintedClaimCode(user);
+
+    if (!claimCode && mintedCode) {
+      throw new AlreadyMintedError('Your POAP has already been claimed!');
+    }
+
+    if (!claimCode) {
+      throw new InvalidAddressError(
+        "Make sure you're using the right wallet address. Only wallet addresses whose DAO was made with Aragon can claim POAPs.",
+      );
+    }
+
+    return claimCode;
   }
 }
