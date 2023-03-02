@@ -1,6 +1,8 @@
 import { Injectable, UnprocessableEntityException } from '@nestjs/common';
 import { ErrorLocation, PoapClaimCodeStatus, User } from '@prisma/client';
 import { addressMatch } from '../common/address-utils';
+import { AlreadyMintedError } from '../errors/already-minted-error';
+import { InvalidAddressError } from '../errors/invalid-address-error';
 import { PendingDaoRegistrySyncService } from '../pending-dao-registry-sync/pending-dao-registry-sync.service';
 import { PoapAuthService } from '../poap-auth/poap-auth.service';
 import { PoapEventService } from '../poap-event/poap-event.service';
@@ -107,13 +109,11 @@ export class PoapClaimCodeService {
     const mintedCode = await this.mintedClaimCode(user);
 
     if (!claimCode && mintedCode) {
-      throw new UnprocessableEntityException(
-        'Your POAP has already been claimed!',
-      );
+      throw new AlreadyMintedError('Your POAP has already been claimed!');
     }
 
     if (!claimCode) {
-      throw new UnprocessableEntityException(
+      throw new InvalidAddressError(
         "Make sure you're using the right wallet address. Only wallet addresses whose DAO was made with Aragon can claim POAPs.",
       );
     }
