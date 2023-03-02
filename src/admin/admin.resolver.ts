@@ -53,4 +53,12 @@ export class AdminResolver {
   async activePoapEvents(): Promise<PoapEvent[]> {
     return this.poapEventService.getActivePoapEvents();
   }
+
+  @Auth({ isAdmin: true })
+  @Mutation(() => Boolean)
+  async grantAdminRole(
+    @Args('address', { type: () => String }) address: string,
+  ): Promise<boolean> {
+    return !!(await this.adminService.grantAdmin(address));
+  }
 }

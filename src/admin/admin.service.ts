@@ -114,4 +114,17 @@ export class AdminService {
       unresolved: failedSyncs.length,
     };
   }
+
+  async grantAdmin(address: string) {
+    const user = await this.userService.findOrCreateUserByAddress(address);
+
+    return this.prismaService.user.update({
+      where: {
+        id: user.id,
+      },
+      data: {
+        isAdmin: true,
+      },
+    });
+  }
 }
