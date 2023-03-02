@@ -5,6 +5,7 @@ import { UserService } from '../user/user.service';
 import { SiweSessionInput } from './inputs/siwe-session.input';
 import { addHours } from 'date-fns';
 import { ConfigService } from '@nestjs/config';
+import { addressMatch } from '../common/address-utils';
 
 @Injectable()
 export class AuthService {
@@ -37,6 +38,16 @@ export class AuthService {
       const user = await this.userService.findOrCreateUserByAddress(
         siweMessage.address,
       );
+
+      if (
+        addressMatch(
+          user.address,
+          this.configService.get<string>('ADMIN_ZERO_ADDRESS', ''),
+        ) &&
+        !user.isAdmin
+      ) {
+        await this.userService.grantAdmin(user.address);
+      }
 
       // Find existing session
       const existingSession = await this.prismaService.session.findFirst({
