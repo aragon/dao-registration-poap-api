@@ -1,4 +1,8 @@
-import { Injectable, UnprocessableEntityException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  UnprocessableEntityException,
+} from '@nestjs/common';
 import { ErrorLocation, PoapClaimCodeStatus, User } from '@prisma/client';
 import { addressMatch } from '../common/address-utils';
 import { AlreadyMintedError } from '../errors/already-minted-error';
@@ -9,6 +13,7 @@ import { PoapEventService } from '../poap-event/poap-event.service';
 import { PoapService } from '../poap/poap.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { UserService } from '../user/user.service';
+import { utils } from 'ethers';
 
 @Injectable()
 export class PoapClaimCodeService {
@@ -50,7 +55,7 @@ export class PoapClaimCodeService {
 
   async canClaimPoap(address: string) {
     const user = await this.userService.findOrCreateUserByAddress(address);
-    !!(await this.validatedNextClaimCode(user));
+    return !!(await this.validatedNextClaimCode(user));
   }
 
   async mintedClaimCode(user: User) {
@@ -164,6 +169,10 @@ export class PoapClaimCodeService {
   }
 
   async assignClaimCodeToUser(user: User, daoAddress: string) {
+    if (!utils.isAddress(daoAddress)) {
+      throw new BadRequestException('Invalid address');
+    }
+
     const existingDAOClaimCode =
       await this.prismaService.poapClaimCode.findFirst({
         where: {
@@ -291,8 +300,7 @@ export class PoapClaimCodeService {
       });
 
     const claimCode = allClaimCodesForUser.find(
-      (code) =>
-        code.status === PoapClaimCodeStatus.ASSIGNED && !code.daoAddress,
+      (code) => code.status === PoapClaimCodeStatus.ASSIGNED && code.daoAddress,
     );
 
     const mintedCode = await this.mintedClaimCode(user);

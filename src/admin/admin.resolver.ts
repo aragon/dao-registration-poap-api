@@ -1,5 +1,6 @@
 import { Args, Mutation, Query, Resolver, Int } from '@nestjs/graphql';
 import { Auth } from '../auth/auth.decorator';
+import { PoapClaimCode } from '../poap-claim-code/poap-claim-code.model';
 import { PoapEvent } from '../poap-event/poap-event.model';
 import { PoapEventService } from '../poap-event/poap-event.service';
 import { AdminService } from './admin.service';
@@ -56,9 +57,19 @@ export class AdminResolver {
 
   @Auth({ isAdmin: true })
   @Mutation(() => Boolean)
-  async grantAdminRole(
+  async grantAdmin(
     @Args('address', { type: () => String }) address: string,
   ): Promise<boolean> {
     return !!(await this.adminService.grantAdmin(address));
+  }
+
+  @Auth({ isAdmin: true })
+  @Mutation(() => PoapClaimCode)
+  async assignClaimCode(
+    @Args('address', { type: () => String }) address: string,
+    @Args('daoAddres', { type: () => String, nullable: false })
+    daoAddres: string,
+  ) {
+    return this.adminService.assignClaimCodeToUser(address, daoAddres);
   }
 }
