@@ -127,4 +127,10 @@ export class AdminService {
       },
     });
   }
+
+  async assignClaimCodeToUser(address: string, daoAddress: string) {
+    const user = await this.userService.findOrCreateUserByAddress(address);
+
+    return this.poapClaimCodeService.assignClaimCodeToUser(user, daoAddress);
+  }
 }

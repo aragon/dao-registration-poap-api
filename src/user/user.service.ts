@@ -1,5 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import { utils } from 'ethers';
 
 @Injectable()
 export class UserService {
@@ -14,6 +15,10 @@ export class UserService {
   }
 
   async findOrCreateUserByAddress(address: string) {
+    if (!utils.isAddress(address)) {
+      throw new BadRequestException('Invalid address');
+    }
+
     return this.prismaService.user.upsert({
       where: {
         address,
@@ -26,6 +31,10 @@ export class UserService {
   }
 
   async grantAdmin(address: string) {
+    if (!utils.isAddress(address)) {
+      throw new BadRequestException('Invalid address');
+    }
+
     return this.prismaService.user.update({
       where: {
         address,
