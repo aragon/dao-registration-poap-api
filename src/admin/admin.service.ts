@@ -9,8 +9,9 @@ import { PoapEventService } from '../poap-event/poap-event.service';
 import { PoapService } from '../poap/poap.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { PoapClaimCodeService } from '../poap-claim-code/poap-claim-code.service';
-import { ReassignPendingSyncResult } from './reassign-pending-sync-result.model';
+import { BulkActionResult } from './bulk-action-result.model';
 import { UserService } from '../user/user.service';
+import { EthereumService } from '../ethereum/ethereum.service';
 
 @Injectable()
 export class AdminService {
@@ -21,6 +22,7 @@ export class AdminService {
     private readonly poapEventService: PoapEventService,
     private readonly poapClaimCodeService: PoapClaimCodeService,
     private readonly userService: UserService,
+    private readonly ethereumService: EthereumService,
   ) {}
 
   async importPoapEvent({ externalId, secretCode }: ImportPoapEventInput) {
@@ -79,7 +81,7 @@ export class AdminService {
   async reassingPendingSyncAttempts(
     pendingCodesCount: number,
     creatorAddress: string = undefined,
-  ): Promise<ReassignPendingSyncResult> {
+  ): Promise<BulkActionResult> {
     const creator = creatorAddress
       ? await this.userService.findOrCreateUserByAddress(creatorAddress)
       : undefined;
@@ -96,22 +98,25 @@ export class AdminService {
         },
       });
 
-    const promises = pendingSyncs.map((pendingSync) => {
-      return this.poapClaimCodeService.assignClaimCodeToUser(
-        pendingSync.user,
-        pendingSync.daoAddress,
-      );
-    });
+    let resolved = 0;
+    let unresolved = 0;
 
-    const results = await Promise.allSettled(promises);
-
-    const failedSyncs = results.filter(
-      (result) => result.status === 'rejected',
-    );
+    for (const pendingSync of pendingSyncs) {
+      try {
+        await this.poapClaimCodeService.assignClaimCodeToUser(
+          pendingSync.user,
+          pendingSync.daoAddress,
+        );
+        resolved++;
+      } catch (error) {
+        console.error(error);
+        unresolved++;
+      }
+    }
 
     return {
-      resolved: results.length - failedSyncs.length,
-      unresolved: failedSyncs.length,
+      resolved,
+      unresolved,
     };
   }
 
@@ -132,5 +137,68 @@ export class AdminService {
     const user = await this.userService.findOrCreateUserByAddress(address);
 
     return this.poapClaimCodeService.assignClaimCodeToUser(user, daoAddress);
+  }
+
+  async backfillDAORegisteredEvents(
+    eventsCount?: number | null,
+  ): Promise<BulkActionResult> {
+    const events = await this.ethereumService.getDAORegisteredEvents({});
+
+    let resolved = 0;
+    let unresolved = 0;
+
+    const daoAddresses = events.map((event) => event.dao);
+
+    const existingClaimCodes = await this.prismaService.poapClaimCode.findMany({
+      where: {
+        daoAddress: {
+          in: daoAddresses,
+        },
+      },
+    });
+
+    const existingPendingSyncs =
+      await this.prismaService.pendingDAORegistrySync.findMany({
+        where: {
+          daoAddress: {
+            in: daoAddresses,
+          },
+        },
+      });
+
+    const alreadyProcessed = [
+      ...existingClaimCodes.map((claimCode) => ({
+        daoAddress: claimCode.daoAddress,
+      })),
+      ...existingPendingSyncs.map((pendingSync) => ({
+        daoAddress: pendingSync.daoAddress,
+      })),
+    ];
+
+    const filteredEvents = events.filter(
+      (event) =>
+        !alreadyProcessed.find(
+          (processedEvent) => processedEvent.daoAddress === event.dao,
+        ),
+    );
+
+    const eventsToProcess = eventsCount
+      ? filteredEvents.slice(0, eventsCount)
+      : filteredEvents;
+
+    for (const event of eventsToProcess) {
+      try {
+        await this.assignClaimCodeToUser(event.creator, event.dao);
+        resolved++;
+      } catch (error) {
+        console.error(error);
+        unresolved++;
+      }
+    }
+
+    return {
+      resolved,
+      unresolved,
+    };
   }
 }

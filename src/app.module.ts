@@ -16,6 +16,7 @@ import { AuthMiddleware } from './user/user.middleware';
 import { AdminModule } from './admin/admin.module';
 import { PendingDaoRegistrySyncModule } from './pending-dao-registry-sync/pending-dao-registry-sync.module';
 import { StatisticsModule } from './statistics/statistics.module';
+import { EthereumModule } from './ethereum/ethereum.module';
 
 @Module({
   imports: [
@@ -45,6 +46,7 @@ import { StatisticsModule } from './statistics/statistics.module';
     AdminModule,
     PendingDaoRegistrySyncModule,
     StatisticsModule,
+    EthereumModule,
   ],
   controllers: [AppController],
   providers: [AppService],

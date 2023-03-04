@@ -59,6 +59,7 @@ model PendingDAORegistrySync {
 }
 
 enum PoapClaimCodeStatus {
+  ASSIGNING
   ASSIGNED
   MINTED
   ERROR

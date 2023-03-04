@@ -9,6 +9,7 @@ import { PoapModule } from '../poap/poap.module';
 import { PoapAuthModule } from '../poap-auth/poap-auth.module';
 import { PendingDaoRegistrySyncModule } from '../pending-dao-registry-sync/pending-dao-registry-sync.module';
 import { PoapClaimCodeModule } from '../poap-claim-code/poap-claim-code.module';
+import { EthereumModule } from '../ethereum/ethereum.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { PoapClaimCodeModule } from '../poap-claim-code/poap-claim-code.module';
     PoapAuthModule,
     PendingDaoRegistrySyncModule,
     PoapClaimCodeModule,
+    EthereumModule,
   ],
   providers: [AdminService, AdminResolver],
 })
