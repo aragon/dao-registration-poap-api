@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { addressMatch } from '../common/address-utils';
-import { EthereumService } from '../ethereum/ethereum.service';
 import { PoapClaimCodeService } from '../poap-claim-code/poap-claim-code.service';
 import { UserService } from '../user/user.service';
 
@@ -11,7 +10,6 @@ export class DefenderService {
     private readonly poapClaimCodeService: PoapClaimCodeService,
     private readonly userService: UserService,
     private readonly configService: ConfigService,
-    private readonly ethereumService: EthereumService,
   ) {}
 
   async handleDAORegistration(body: DefenderWebhookBody) {
