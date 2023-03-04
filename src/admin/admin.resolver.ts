@@ -5,7 +5,7 @@ import { PoapEvent } from '../poap-event/poap-event.model';
 import { PoapEventService } from '../poap-event/poap-event.service';
 import { AdminService } from './admin.service';
 import { ImportPoapEventInput } from './inputs/import-poap-event.input';
-import { ReassignPendingSyncResult } from './reassign-pending-sync-result.model';
+import { BulkActionResult } from './bulk-action-result.model';
 
 @Resolver('Admin')
 export class AdminResolver {
@@ -23,12 +23,12 @@ export class AdminResolver {
   }
 
   @Auth({ isAdmin: true })
-  @Mutation(() => ReassignPendingSyncResult)
+  @Mutation(() => BulkActionResult)
   async reassignPendingClaimCodes(
     @Args('count', { type: () => Int }) pendingCodesCount: number,
     @Args('creatorAddress', { type: () => String, nullable: true })
     creatorAddress: string,
-  ): Promise<ReassignPendingSyncResult> {
+  ): Promise<BulkActionResult> {
     return this.adminService.reassingPendingSyncAttempts(
       pendingCodesCount,
       creatorAddress,
@@ -71,5 +71,13 @@ export class AdminResolver {
     daoAddres: string,
   ) {
     return this.adminService.assignClaimCodeToUser(address, daoAddres);
+  }
+
+  @Auth({ isAdmin: true })
+  @Mutation(() => BulkActionResult)
+  async backfillDAORegisteredEvents(
+    @Args('count', { type: () => Int, nullable: true }) eventsCount: number,
+  ): Promise<BulkActionResult> {
+    return this.adminService.backfillDAORegisteredEvents(eventsCount);
   }
 }

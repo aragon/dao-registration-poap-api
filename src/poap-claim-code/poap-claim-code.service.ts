@@ -14,6 +14,7 @@ import { PoapService } from '../poap/poap.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { UserService } from '../user/user.service';
 import { utils } from 'ethers';
+import { ExternalPoapClaimCode } from '../poap/types';
 
 @Injectable()
 export class PoapClaimCodeService {
@@ -214,6 +215,8 @@ export class PoapClaimCodeService {
       (eventId) => !existingClaimCodeEventIds.includes(eventId),
     );
 
+    const authToken = await this.poapAuthService.getAuthToken();
+
     const nextClaimCode = await this.prismaService.poapClaimCode.findFirst({
       where: {
         userId: null,
@@ -236,14 +239,36 @@ export class PoapClaimCodeService {
       );
 
       throw new Error('No more claim codes available for this user');
+    } else {
+      // Lock it so no other user can claim it
+      await this.prismaService.poapClaimCode.update({
+        where: {
+          id: nextClaimCode.id,
+        },
+        data: {
+          status: PoapClaimCodeStatus.ASSIGNING,
+        },
+      });
     }
 
-    const authToken = await this.poapAuthService.getAuthToken();
+    let externalClaimCode: ExternalPoapClaimCode;
 
-    const externalClaimCode = await this.poapService.getClaimQrCode(
-      nextClaimCode.qrHash,
-      authToken.authToken,
-    );
+    try {
+      externalClaimCode = await this.poapService.getClaimQrCode(
+        nextClaimCode.qrHash,
+        authToken.authToken,
+      );
+    } catch (error) {
+      await this.prismaService.poapClaimCode.update({
+        where: {
+          id: nextClaimCode.id,
+        },
+        data: {
+          status: PoapClaimCodeStatus.UNASSIGNED,
+        },
+      });
+      throw new Error('Error getting claim code');
+    }
 
     // Edge case where the claim code is already claimed externally
     if (externalClaimCode.claimed) {
