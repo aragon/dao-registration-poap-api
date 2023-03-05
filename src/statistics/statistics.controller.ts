@@ -7,6 +7,12 @@ export class StatisticsController {
 
   @Get('/')
   async statistics() {
-    return this.statisticsService.getStatistics();
+    try {
+      const result = await this.statisticsService.getStatistics();
+      return result;
+    } catch (error) {
+      console.log(error);
+      return { error: error.message };
+    }
   }
 }
