@@ -246,7 +246,7 @@ export class PoapClaimCodeService {
           id: nextClaimCode.id,
         },
         data: {
-          status: PoapClaimCodeStatus.ASSIGNING,
+          status: PoapClaimCodeStatus.ASSIGNED,
         },
       });
     }
