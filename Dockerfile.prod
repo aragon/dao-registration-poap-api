@@ -10,8 +10,6 @@ COPY --chown=node:node . .
 
 RUN rm -rf .git/ && rm -rf .github/ && rm -rf .env* && rm -rf .vscode
 
-RUN npm run migrate:deploy
-
 RUN npm run prisma:generate
 
 RUN npm run build
