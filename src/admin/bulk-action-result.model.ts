@@ -1,7 +1,7 @@
 import { Field, ObjectType, Int } from '@nestjs/graphql';
 
 @ObjectType()
-export class ReassignPendingSyncResult {
+export class BulkActionResult {
   @Field(() => Int)
   resolved: number;
 
