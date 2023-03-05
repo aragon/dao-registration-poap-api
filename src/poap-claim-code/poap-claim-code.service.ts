@@ -19,8 +19,8 @@ import { ExternalPoapClaimCode } from '../poap/types';
 @Injectable()
 export class PoapClaimCodeService {
   constructor(
-    private readonly prismaService: PrismaService,
     private readonly poapService: PoapService,
+    private readonly prismaService: PrismaService,
     private readonly poapAuthService: PoapAuthService,
     private readonly poapEventService: PoapEventService,
     private readonly pendingDaoRegistrySyncService: PendingDaoRegistrySyncService,
