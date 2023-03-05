@@ -18,7 +18,7 @@
     "migrate:sync": "npx prisma migrate dev",
     "migrate:deploy": "npx prisma migrate deploy",
     "db:reset": "npx prisma migrate reset --force",
-    "start:migrate:prod": "npm run migrate:deploy && npm run start:prod",
+    "start:migrate:prod": "npm run db:reset && npm run migrate:deploy && npm run start:prod",
     "prisma:generate": "npx prisma generate",
     "test": "jest",
     "test:watch": "jest --watch",

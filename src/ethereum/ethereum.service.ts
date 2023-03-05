@@ -11,11 +11,11 @@ export class EthereumService {
 
   constructor(private readonly configService: ConfigService) {
     this.alchemyProvider = new ethers.providers.JsonRpcProvider(
-      this.configService.get('ALCHEMY_RPC_URL'),
+      this.configService.get('ALCHEMY_RPC_URL', ''),
     );
 
     this.contract = new ethers.Contract(
-      this.configService.get<string>('DAO_REGISTRY_CONTRACT_ADDRESS'),
+      this.configService.get<string>('DAO_REGISTRY_CONTRACT_ADDRESS', ''),
       DaoRegistryABI,
       this.alchemyProvider,
     );
