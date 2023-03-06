@@ -14,14 +14,23 @@ export class EthereumService {
       this.configService.get('ALCHEMY_RPC_URL', ''),
     );
 
-    this.contract = new ethers.Contract(
-      this.configService.get<string>('DAO_REGISTRY_CONTRACT_ADDRESS', ''),
-      DaoRegistryABI,
-      this.alchemyProvider,
+    const contractAddress = this.configService.get<string>(
+      'DAO_REGISTRY_CONTRACT_ADDRESS',
+      '',
     );
+
+    if (contractAddress) {
+      this.contract = new ethers.Contract(
+        this.configService.get<string>('DAO_REGISTRY_CONTRACT_ADDRESS', ''),
+        DaoRegistryABI,
+        this.alchemyProvider,
+      );
+    }
   }
 
   async getDAORegisteredEvents(daoRegistryFilterInput: DaoRegistryFilterInput) {
+    if (!this.contract) return Promise.resolve([]);
+
     const filter = this.contract.filters.DAORegistered(
       daoRegistryFilterInput.dao,
       daoRegistryFilterInput.creator,
