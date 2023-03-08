@@ -27,6 +27,23 @@ export class PoapClaimCodeService {
     private readonly userService: UserService,
   ) {}
 
+  async getUserForClaimCode(id: number) {
+    const claimCode = await this.prismaService.poapClaimCode.findUnique({
+      where: {
+        id,
+      },
+      select: {
+        user: true,
+      },
+    });
+
+    if (!claimCode) {
+      throw new UnprocessableEntityException('Invalid claim code');
+    }
+
+    return claimCode.user;
+  }
+
   async getGroupedActiveClaimCodesCountByStatus() {
     const activeEvents = await this.poapEventService.getActivePoapEvents();
 
