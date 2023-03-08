@@ -80,4 +80,18 @@ export class AdminResolver {
   ): Promise<BulkActionResult> {
     return this.adminService.backfillDAORegisteredEvents(eventsCount);
   }
+
+  @Auth({ isAdmin: true })
+  @Mutation(() => [PoapClaimCode])
+  async assignedCodes(): Promise<PoapClaimCode[]> {
+    return this.adminService.assignedClaimCodes();
+  }
+
+  @Auth({ isAdmin: true })
+  @Mutation(() => Boolean)
+  async deleteEvent(
+    @Args('externalId', { type: () => Int }) externalId: number,
+  ): Promise<boolean> {
+    return this.adminService.deleteEvent(externalId);
+  }
 }

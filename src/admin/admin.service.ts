@@ -139,6 +139,16 @@ export class AdminService {
     return this.poapClaimCodeService.assignClaimCodeToUser(user, daoAddress);
   }
 
+  async assignedClaimCodes() {
+    return this.prismaService.poapClaimCode.findMany({
+      where: {
+        userId: {
+          not: null,
+        },
+      },
+    });
+  }
+
   async backfillDAORegisteredEvents(
     eventsCount?: number | null,
   ): Promise<BulkActionResult> {
@@ -200,5 +210,27 @@ export class AdminService {
       resolved,
       unresolved,
     };
+  }
+
+  async deleteEvent(externalId: number) {
+    const event = await this.prismaService.poapEvent.findUnique({
+      where: {
+        externalId,
+      },
+    });
+
+    await this.prismaService.poapClaimCode.deleteMany({
+      where: {
+        eventId: event.id,
+      },
+    });
+
+    await this.prismaService.poapEvent.delete({
+      where: {
+        id: event.id,
+      },
+    });
+
+    return true;
   }
 }
