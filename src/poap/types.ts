@@ -27,4 +27,7 @@ export type ExternalPoapClaimCode = {
   is_active: boolean;
   tx_status: string;
   secret: string;
+  result?: {
+    token_id?: number;
+  };
 };

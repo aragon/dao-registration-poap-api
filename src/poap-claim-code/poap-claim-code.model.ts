@@ -16,4 +16,7 @@ export class PoapClaimCode {
   daoAddress: string;
 
   eventId: number;
+
+  @Field(() => Int, { description: 'Token ID', nullable: true })
+  tokenId?: number;
 }
