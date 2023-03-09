@@ -82,7 +82,7 @@ export class AdminResolver {
   }
 
   @Auth({ isAdmin: true })
-  @Mutation(() => [PoapClaimCode])
+  @Query(() => [PoapClaimCode])
   async assignedCodes(): Promise<PoapClaimCode[]> {
     return this.adminService.assignedClaimCodes();
   }
