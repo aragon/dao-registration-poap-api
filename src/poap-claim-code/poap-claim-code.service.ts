@@ -15,6 +15,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { UserService } from '../user/user.service';
 import { utils } from 'ethers';
 import { ExternalPoapClaimCode } from '../poap/types';
+import { PoapClaimCode } from './poap-claim-code.model';
 
 @Injectable()
 export class PoapClaimCodeService {
@@ -114,7 +115,7 @@ export class PoapClaimCodeService {
     });
   }
 
-  async mintClaimCode(user: User) {
+  async mintClaimCode(user: User): Promise<PoapClaimCode> {
     const claimCode = await this.validatedNextClaimCode(user);
 
     const authToken = await this.poapAuthService.getAuthToken();
@@ -159,12 +160,23 @@ export class PoapClaimCodeService {
       }
     }
 
-    const mintedClaimCode = await this.poapService.claimQrCode(
-      claimCode.qrHash,
-      user.address,
-      externalClaimCode.secret,
-      authToken.authToken,
-    );
+    let mintedClaimCode: ExternalPoapClaimCode;
+
+    try {
+      await this.poapService.claimQrCode(
+        claimCode.qrHash,
+        user.address,
+        externalClaimCode.secret,
+        authToken.authToken,
+      );
+
+      mintedClaimCode = await this.poapService.getClaimQrCode(
+        claimCode.qrHash,
+        authToken.authToken,
+      );
+    } catch (error) {
+      throw new UnprocessableEntityException('Error minting claim code');
+    }
 
     if (!mintedClaimCode) {
       throw new UnprocessableEntityException('Error minting claim code');
@@ -179,11 +191,16 @@ export class PoapClaimCodeService {
       },
     });
 
-    return this.prismaService.poapClaimCode.findUnique({
+    const result = await this.prismaService.poapClaimCode.findUnique({
       where: {
         id: claimCode.id,
       },
     });
+
+    return {
+      ...result,
+      tokenId: mintedClaimCode.result?.token_id,
+    };
   }
 
   async assignClaimCodeToUser(user: User, daoAddress: string) {
