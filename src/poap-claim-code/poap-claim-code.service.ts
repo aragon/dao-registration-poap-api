@@ -353,7 +353,7 @@ export class PoapClaimCodeService {
 
     if (!claimCode) {
       throw new InvalidAddressError(
-        "Make sure you're using the right wallet address. Only wallet addresses whose DAO was made with Aragon can claim POAPs.",
+        "Make sure you're using the right wallet address. Only wallet addresses whose DAO was made with Aragon can claim this POAP.",
       );
     }
 
