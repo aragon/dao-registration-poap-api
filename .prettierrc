@@ -1,0 +1,11 @@
+{
+  "overrides": [
+    {
+      "files": "{src,test}/**/*.ts",
+      "options": {
+        "singleQuote": true,
+        "trailingComma": "all"
+      }
+    }
+  ]
+}

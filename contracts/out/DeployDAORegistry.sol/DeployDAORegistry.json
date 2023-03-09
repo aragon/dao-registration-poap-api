@@ -1,0 +1,558 @@
+{
+  "abi": [
+    {
+      "inputs": [],
+      "name": "IS_SCRIPT",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "deploy",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x6080604052600c805460ff1916600117905534801561001d57600080fd5b506103fe8061002d6000396000f3fe608060405234801561001057600080fd5b50600436106100365760003560e01c8063775c300c1461003b578063f8ccbf4714610045575b600080fd5b610043610066565b005b600c546100529060ff1681565b604051901515815260200160405180910390f35b7f885cb69240a935d632d79c317109709ecfa91a80626ff3989d68f67f5b1dd12d60001c6001600160a01b0316637fb5297f6040518163ffffffff1660e01b8152600401600060405180830381600087803b1580156100c457600080fd5b505af11580156100d8573d6000803e3d6000fd5b505050506040516100e89061017e565b604051809103906000f080158015610104573d6000803e3d6000fd5b50507f885cb69240a935d632d79c317109709ecfa91a80626ff3989d68f67f5b1dd12d60001c6001600160a01b03166376eadd366040518163ffffffff1660e01b8152600401600060405180830381600087803b15801561016457600080fd5b505af1158015610178573d6000803e3d6000fd5b50505050565b61023d8061018c8339019056fe608060405234801561001057600080fd5b5061021d806100206000396000f3fe608060405234801561001057600080fd5b506004361061002b5760003560e01c8063a9682a6a14610030575b600080fd5b61004361003e3660046100c7565b610045565b005b816001600160a01b0316836001600160a01b03167fbc0b11fe649bb4d67c7fb40936163e5423f45c3ae83fbd8f8f8c75e1a3fa97af836040516100889190610199565b60405180910390a3505050565b80356001600160a01b03811681146100ac57600080fd5b919050565b634e487b7160e01b600052604160045260246000fd5b6000806000606084860312156100dc57600080fd5b6100e584610095565b92506100f360208501610095565b9150604084013567ffffffffffffffff8082111561011057600080fd5b818601915086601f83011261012457600080fd5b813581811115610136576101366100b1565b604051601f8201601f19908116603f0116810190838211818310171561015e5761015e6100b1565b8160405282815289602084870101111561017757600080fd5b8260208601602083013760006020848301015280955050505050509250925092565b600060208083528351808285015260005b818110156101c6578581018301518582016040015282016101aa565b506000604082860101526040601f19601f830116850101925050509291505056fea2646970667358221220e4cbe68050186105603b45d4bdd1c257e9491e95e05edbdb1251854e8fbd211364736f6c63430008110033a26469706673582212201ca34b724fe5466ce990d484fe525537dc36c877348dd7cc1902767bc2c55e0764736f6c63430008110033",
+    "sourceMap": "249:165:13:-:0;;;758:28:1;;;-1:-1:-1;;758:28:1;782:4;758:28;;;249:165:13;;;;;;;;;;;;;;;;",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x608060405234801561001057600080fd5b50600436106100365760003560e01c8063775c300c1461003b578063f8ccbf4714610045575b600080fd5b610043610066565b005b600c546100529060ff1681565b604051901515815260200160405180910390f35b7f885cb69240a935d632d79c317109709ecfa91a80626ff3989d68f67f5b1dd12d60001c6001600160a01b0316637fb5297f6040518163ffffffff1660e01b8152600401600060405180830381600087803b1580156100c457600080fd5b505af11580156100d8573d6000803e3d6000fd5b505050506040516100e89061017e565b604051809103906000f080158015610104573d6000803e3d6000fd5b50507f885cb69240a935d632d79c317109709ecfa91a80626ff3989d68f67f5b1dd12d60001c6001600160a01b03166376eadd366040518163ffffffff1660e01b8152600401600060405180830381600087803b15801561016457600080fd5b505af1158015610178573d6000803e3d6000fd5b50505050565b61023d8061018c8339019056fe608060405234801561001057600080fd5b5061021d806100206000396000f3fe608060405234801561001057600080fd5b506004361061002b5760003560e01c8063a9682a6a14610030575b600080fd5b61004361003e3660046100c7565b610045565b005b816001600160a01b0316836001600160a01b03167fbc0b11fe649bb4d67c7fb40936163e5423f45c3ae83fbd8f8f8c75e1a3fa97af836040516100889190610199565b60405180910390a3505050565b80356001600160a01b03811681146100ac57600080fd5b919050565b634e487b7160e01b600052604160045260246000fd5b6000806000606084860312156100dc57600080fd5b6100e584610095565b92506100f360208501610095565b9150604084013567ffffffffffffffff8082111561011057600080fd5b818601915086601f83011261012457600080fd5b813581811115610136576101366100b1565b604051601f8201601f19908116603f0116810190838211818310171561015e5761015e6100b1565b8160405282815289602084870101111561017757600080fd5b8260208601602083013760006020848301015280955050505050509250925092565b600060208083528351808285015260005b818110156101c6578581018301518582016040015282016101aa565b506000604082860101526040601f19601f830116850101925050509291505056fea2646970667358221220e4cbe68050186105603b45d4bdd1c257e9491e95e05edbdb1251854e8fbd211364736f6c63430008110033a26469706673582212201ca34b724fe5466ce990d484fe525537dc36c877348dd7cc1902767bc2c55e0764736f6c63430008110033",
+    "sourceMap": "249:165:13:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;292:120;;;:::i;:::-;;758:28:1;;;;;;;;;;;;179:14:14;;172:22;154:41;;142:2;127:18;758:28:1;;;;;;;292:120:13;317:28:0;309:37;;-1:-1:-1;;;;;329:17:13;;:19;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;359:17;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;317:28:0;309:37;;-1:-1:-1;;;;;387:16:13;;:18;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;292:120::o;-1:-1:-1:-;;;;;;;;:::o",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "IS_SCRIPT()": "f8ccbf47",
+    "deploy()": "775c300c"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"IS_SCRIPT\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"deploy\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/src/scripts/DeployDAORegistry.sol\":\"DeployDAORegistry\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":ds-test/=contracts/lib/forge-std/lib/ds-test/src/\",\":forge-std/=contracts/lib/forge-std/src/\",\":openzeppelin-contracts-v4.7.3/=contracts/lib/openzeppelin-contracts-v4.7.3/contracts/\",\":openzeppelin-contracts/=contracts/lib/openzeppelin-contracts/contracts/\"]},\"sources\":{\"contracts/lib/forge-std/src/Base.sol\":{\"keccak256\":\"0x609e3a00319169988cc8272e837f350a9ba77cf8f8f62e4897a8e4a8a5f0fb27\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://b24435e35ba5b080ebd6e8976c23fb735c7212d042be8462ffd2ea50c5250363\",\"dweb:/ipfs/QmPeVvN7FS4oMmCuYAeRdZihTfrG4tA7Vvunuvv59a6wre\"]},\"contracts/lib/forge-std/src/Script.sol\":{\"keccak256\":\"0xd566affaba92598bcd059dcb3714a968aeedb365ec0d666815e8b38519e0f433\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://2fb5f7a97d2a7a06e10c198b60f05e64176eb4ef306b72800c168e7a7ec51693\",\"dweb:/ipfs/Qmcep4r7YEU3BwFJNTTxZsdCVzBYdtcVp8oDtmwLoZGRzP\"]},\"contracts/lib/forge-std/src/StdChains.sol\":{\"keccak256\":\"0x38c788c4869b7692243c98de26857f392175ba292de160d9eac24fa34ed1d1b8\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://d4b18b42ccd9f51ace79f470fe2d196974ae867667c5a7e9b7e8ddb47a5e83a6\",\"dweb:/ipfs/QmZ8AJdCrMVFLsZJsvp2d4Zi7c7wVgQh45XrVwdrzR3Vmr\"]},\"contracts/lib/forge-std/src/StdCheats.sol\":{\"keccak256\":\"0xf6746576912986486f4e5eccdb6b3bbb03e47c4da75a59acc4b1c313b8d31d9f\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://01fd4243d8a85cc7f07b6c5ac9e3f5f38b2443ef82025953c3badb39099fe2e4\",\"dweb:/ipfs/QmVDUyQ3tE4a2b87wJDAkwwyFwRpUPGuy8yJDV9JgHqnrd\"]},\"contracts/lib/forge-std/src/StdJson.sol\":{\"keccak256\":\"0x9e2a7521190c462a0667706385f1c52a816220a9813ca8ac520fba7ba45d660b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://7d23017fe6570b28130a731b86179352b93a5fb5af32f11559837afc1186293c\",\"dweb:/ipfs/QmR3p6zG5Kmcr8gKocFCSopLHfXv1AziPJbH17nKyMxwxV\"]},\"contracts/lib/forge-std/src/StdMath.sol\":{\"keccak256\":\"0xd90ad4fd8aeaeb8929964e686e769fdedd5eded3fc3815df194a0ab9f91a3fb2\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://7919b70f636c7b805223992f28ad1ad0145d6c1385b5931a3589aface5fe6c92\",\"dweb:/ipfs/QmY7FRaULwoGgFteF8GawjQJRfasNgpWnU2aiMsFrYpuTC\"]},\"contracts/lib/forge-std/src/StdStorage.sol\":{\"keccak256\":\"0xd1517df281f973dba8b7ba52c02d3df552b60d91b8f47e4669049da648778673\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://52e43264f58a5dcfd985f3c99aa81064805aa8f1c2b4c6521fd63d45cdbba8d5\",\"dweb:/ipfs/QmUMTF6cRjt5tCQrrgQDXVRmHQLjevNsTvLFdaA1m9TBj9\"]},\"contracts/lib/forge-std/src/StdUtils.sol\":{\"keccak256\":\"0x6584855fecbe5b6a9f8ebdb26b37c58532c5bc5cc6e1737dfa7c8a045087be55\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://40a35a4d292b4fed02e11d5f25fb474f10a7c4eb99f75b5383dc23fcb6e55d3c\",\"dweb:/ipfs/QmYZ2nz1EmNh4xLWf4YybZoa1Da1z3Wq3w4pneMhkouMi4\"]},\"contracts/lib/forge-std/src/Vm.sol\":{\"keccak256\":\"0xe0cfe5ca62fb9d9366be870999bd82802d6b913c1f960f67b8f17060008f2d1a\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ddadc1e899953cb26e7d87c0f27284d02f09b611cfd3300e321c33dc2c65d0b3\",\"dweb:/ipfs/Qmbmrdph3D5YweihJSPM6sopZcSKWMox2ZM89dyonfhrq8\"]},\"contracts/lib/forge-std/src/console.sol\":{\"keccak256\":\"0x91d5413c2434ca58fd278b6e1e79fd98d10c83931cc2596a6038eee4daeb34ba\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://91ccea707361e48b9b7a161fe81f496b9932bc471e9c4e4e1e9c283f2453cc70\",\"dweb:/ipfs/QmcB66sZhQ6Kz7MUHcLE78YXRUZxoZnnxZjN6yATsbB2ec\"]},\"contracts/lib/forge-std/src/console2.sol\":{\"keccak256\":\"0xcd5706f5a7025825d9fd389c89b49bf571f9abaea8a062dc4048320b5b43bf46\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://c066485a7d4bd18d44efb4c89274b0959e8066b9a480383a2ce07d7f31555f88\",\"dweb:/ipfs/QmckeYfA5FtAjcxaytq69Dpj6uY57tbQ61kNPPxXi9kgbW\"]},\"contracts/lib/forge-std/src/interfaces/IMulticall3.sol\":{\"keccak256\":\"0x7aac1389150499a922d1f9ef5749c908cef127cb2075b92fa17e9cb611263d0a\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://d95ebb7c7c463e08ebc12dab639945752fb2480acfc6e86da32f72732a7fd0c0\",\"dweb:/ipfs/QmNXK8P8oPWwajsQHvAHw3JPyQidPLCGQN3hWu1Lk6PBL2\"]},\"contracts/src/DAORegistry.sol\":{\"keccak256\":\"0x479f48fca1e8c0b733f666cfa94b4427af0c97a8960ff0bfe5181e3c9b6c45b3\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://a8eeb35ad1b60fb75a3b32f1c38f298d6b4a5b201416397e60ff1aeed5cfb738\",\"dweb:/ipfs/QmWLVHtpQnGG32Aok5GKQ8XQZJNecGyj6a5CkVvauXNqkB\"]},\"contracts/src/scripts/DeployDAORegistry.sol\":{\"keccak256\":\"0xf66ca961c4bd1189b01733934e2d3aed0adea45903d972d686ca2c51a5870bec\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://b50d7eafd38bcb1a7afe7e6935d4e885d8b1a3ac4fd63ea1bac0419cb7ebb49e\",\"dweb:/ipfs/QmWGL1vncnuEHkWYpiQPo9P5xDV7xfaGyrsBrbFAxJLERA\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.17+commit.8df45f5f"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "IS_SCRIPT",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ]
+        },
+        {
+          "inputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "deploy"
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        ":ds-test/=contracts/lib/forge-std/lib/ds-test/src/",
+        ":forge-std/=contracts/lib/forge-std/src/",
+        ":openzeppelin-contracts-v4.7.3/=contracts/lib/openzeppelin-contracts-v4.7.3/contracts/",
+        ":openzeppelin-contracts/=contracts/lib/openzeppelin-contracts/contracts/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "contracts/src/scripts/DeployDAORegistry.sol": "DeployDAORegistry"
+      },
+      "libraries": {}
+    },
+    "sources": {
+      "contracts/lib/forge-std/src/Base.sol": {
+        "keccak256": "0x609e3a00319169988cc8272e837f350a9ba77cf8f8f62e4897a8e4a8a5f0fb27",
+        "urls": [
+          "bzz-raw://b24435e35ba5b080ebd6e8976c23fb735c7212d042be8462ffd2ea50c5250363",
+          "dweb:/ipfs/QmPeVvN7FS4oMmCuYAeRdZihTfrG4tA7Vvunuvv59a6wre"
+        ],
+        "license": "MIT"
+      },
+      "contracts/lib/forge-std/src/Script.sol": {
+        "keccak256": "0xd566affaba92598bcd059dcb3714a968aeedb365ec0d666815e8b38519e0f433",
+        "urls": [
+          "bzz-raw://2fb5f7a97d2a7a06e10c198b60f05e64176eb4ef306b72800c168e7a7ec51693",
+          "dweb:/ipfs/Qmcep4r7YEU3BwFJNTTxZsdCVzBYdtcVp8oDtmwLoZGRzP"
+        ],
+        "license": "MIT"
+      },
+      "contracts/lib/forge-std/src/StdChains.sol": {
+        "keccak256": "0x38c788c4869b7692243c98de26857f392175ba292de160d9eac24fa34ed1d1b8",
+        "urls": [
+          "bzz-raw://d4b18b42ccd9f51ace79f470fe2d196974ae867667c5a7e9b7e8ddb47a5e83a6",
+          "dweb:/ipfs/QmZ8AJdCrMVFLsZJsvp2d4Zi7c7wVgQh45XrVwdrzR3Vmr"
+        ],
+        "license": "MIT"
+      },
+      "contracts/lib/forge-std/src/StdCheats.sol": {
+        "keccak256": "0xf6746576912986486f4e5eccdb6b3bbb03e47c4da75a59acc4b1c313b8d31d9f",
+        "urls": [
+          "bzz-raw://01fd4243d8a85cc7f07b6c5ac9e3f5f38b2443ef82025953c3badb39099fe2e4",
+          "dweb:/ipfs/QmVDUyQ3tE4a2b87wJDAkwwyFwRpUPGuy8yJDV9JgHqnrd"
+        ],
+        "license": "MIT"
+      },
+      "contracts/lib/forge-std/src/StdJson.sol": {
+        "keccak256": "0x9e2a7521190c462a0667706385f1c52a816220a9813ca8ac520fba7ba45d660b",
+        "urls": [
+          "bzz-raw://7d23017fe6570b28130a731b86179352b93a5fb5af32f11559837afc1186293c",
+          "dweb:/ipfs/QmR3p6zG5Kmcr8gKocFCSopLHfXv1AziPJbH17nKyMxwxV"
+        ],
+        "license": "MIT"
+      },
+      "contracts/lib/forge-std/src/StdMath.sol": {
+        "keccak256": "0xd90ad4fd8aeaeb8929964e686e769fdedd5eded3fc3815df194a0ab9f91a3fb2",
+        "urls": [
+          "bzz-raw://7919b70f636c7b805223992f28ad1ad0145d6c1385b5931a3589aface5fe6c92",
+          "dweb:/ipfs/QmY7FRaULwoGgFteF8GawjQJRfasNgpWnU2aiMsFrYpuTC"
+        ],
+        "license": "MIT"
+      },
+      "contracts/lib/forge-std/src/StdStorage.sol": {
+        "keccak256": "0xd1517df281f973dba8b7ba52c02d3df552b60d91b8f47e4669049da648778673",
+        "urls": [
+          "bzz-raw://52e43264f58a5dcfd985f3c99aa81064805aa8f1c2b4c6521fd63d45cdbba8d5",
+          "dweb:/ipfs/QmUMTF6cRjt5tCQrrgQDXVRmHQLjevNsTvLFdaA1m9TBj9"
+        ],
+        "license": "MIT"
+      },
+      "contracts/lib/forge-std/src/StdUtils.sol": {
+        "keccak256": "0x6584855fecbe5b6a9f8ebdb26b37c58532c5bc5cc6e1737dfa7c8a045087be55",
+        "urls": [
+          "bzz-raw://40a35a4d292b4fed02e11d5f25fb474f10a7c4eb99f75b5383dc23fcb6e55d3c",
+          "dweb:/ipfs/QmYZ2nz1EmNh4xLWf4YybZoa1Da1z3Wq3w4pneMhkouMi4"
+        ],
+        "license": "MIT"
+      },
+      "contracts/lib/forge-std/src/Vm.sol": {
+        "keccak256": "0xe0cfe5ca62fb9d9366be870999bd82802d6b913c1f960f67b8f17060008f2d1a",
+        "urls": [
+          "bzz-raw://ddadc1e899953cb26e7d87c0f27284d02f09b611cfd3300e321c33dc2c65d0b3",
+          "dweb:/ipfs/Qmbmrdph3D5YweihJSPM6sopZcSKWMox2ZM89dyonfhrq8"
+        ],
+        "license": "MIT"
+      },
+      "contracts/lib/forge-std/src/console.sol": {
+        "keccak256": "0x91d5413c2434ca58fd278b6e1e79fd98d10c83931cc2596a6038eee4daeb34ba",
+        "urls": [
+          "bzz-raw://91ccea707361e48b9b7a161fe81f496b9932bc471e9c4e4e1e9c283f2453cc70",
+          "dweb:/ipfs/QmcB66sZhQ6Kz7MUHcLE78YXRUZxoZnnxZjN6yATsbB2ec"
+        ],
+        "license": "MIT"
+      },
+      "contracts/lib/forge-std/src/console2.sol": {
+        "keccak256": "0xcd5706f5a7025825d9fd389c89b49bf571f9abaea8a062dc4048320b5b43bf46",
+        "urls": [
+          "bzz-raw://c066485a7d4bd18d44efb4c89274b0959e8066b9a480383a2ce07d7f31555f88",
+          "dweb:/ipfs/QmckeYfA5FtAjcxaytq69Dpj6uY57tbQ61kNPPxXi9kgbW"
+        ],
+        "license": "MIT"
+      },
+      "contracts/lib/forge-std/src/interfaces/IMulticall3.sol": {
+        "keccak256": "0x7aac1389150499a922d1f9ef5749c908cef127cb2075b92fa17e9cb611263d0a",
+        "urls": [
+          "bzz-raw://d95ebb7c7c463e08ebc12dab639945752fb2480acfc6e86da32f72732a7fd0c0",
+          "dweb:/ipfs/QmNXK8P8oPWwajsQHvAHw3JPyQidPLCGQN3hWu1Lk6PBL2"
+        ],
+        "license": "MIT"
+      },
+      "contracts/src/DAORegistry.sol": {
+        "keccak256": "0x479f48fca1e8c0b733f666cfa94b4427af0c97a8960ff0bfe5181e3c9b6c45b3",
+        "urls": [
+          "bzz-raw://a8eeb35ad1b60fb75a3b32f1c38f298d6b4a5b201416397e60ff1aeed5cfb738",
+          "dweb:/ipfs/QmWLVHtpQnGG32Aok5GKQ8XQZJNecGyj6a5CkVvauXNqkB"
+        ],
+        "license": "UNLICENSED"
+      },
+      "contracts/src/scripts/DeployDAORegistry.sol": {
+        "keccak256": "0xf66ca961c4bd1189b01733934e2d3aed0adea45903d972d686ca2c51a5870bec",
+        "urls": [
+          "bzz-raw://b50d7eafd38bcb1a7afe7e6935d4e885d8b1a3ac4fd63ea1bac0419cb7ebb49e",
+          "dweb:/ipfs/QmWGL1vncnuEHkWYpiQPo9P5xDV7xfaGyrsBrbFAxJLERA"
+        ],
+        "license": "UNLICENSED"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "contracts/src/scripts/DeployDAORegistry.sol",
+    "id": 23391,
+    "exportedSymbols": {
+      "DAORegistry": [
+        23363
+      ],
+      "DeployDAORegistry": [
+        23390
+      ],
+      "Script": [
+        108
+      ],
+      "ScriptBase": [
+        71
+      ],
+      "StdChains": [
+        772
+      ],
+      "StdCheatsSafe": [
+        2344
+      ],
+      "StdStorage": [
+        3483
+      ],
+      "StdUtils": [
+        5723
+      ],
+      "VmSafe": [
+        6688
+      ],
+      "console": [
+        15077
+      ],
+      "console2": [
+        23173
+      ],
+      "stdJson": [
+        3309
+      ],
+      "stdMath": [
+        3451
+      ],
+      "stdStorageSafe": [
+        4375
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "40:375:13",
+    "nodes": [
+      {
+        "id": 23365,
+        "nodeType": "PragmaDirective",
+        "src": "40:24:13",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".15"
+        ]
+      },
+      {
+        "id": 23366,
+        "nodeType": "ImportDirective",
+        "src": "66:30:13",
+        "nodes": [],
+        "absolutePath": "contracts/lib/forge-std/src/Script.sol",
+        "file": "forge-std/Script.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 23391,
+        "sourceUnit": 109,
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "id": 23367,
+        "nodeType": "ImportDirective",
+        "src": "97:31:13",
+        "nodes": [],
+        "absolutePath": "contracts/lib/forge-std/src/console.sol",
+        "file": "forge-std/console.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 23391,
+        "sourceUnit": 15078,
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "id": 23368,
+        "nodeType": "ImportDirective",
+        "src": "129:39:13",
+        "nodes": [],
+        "absolutePath": "contracts/src/DAORegistry.sol",
+        "file": "contracts/src/DAORegistry.sol",
+        "nameLocation": "-1:-1:-1",
+        "scope": 23391,
+        "sourceUnit": 23364,
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "id": 23390,
+        "nodeType": "ContractDefinition",
+        "src": "249:165:13",
+        "nodes": [
+          {
+            "id": 23389,
+            "nodeType": "FunctionDefinition",
+            "src": "292:120:13",
+            "nodes": [],
+            "body": {
+              "id": 23388,
+              "nodeType": "Block",
+              "src": "319:93:13",
+              "nodes": [],
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [],
+                    "expression": {
+                      "argumentTypes": [],
+                      "expression": {
+                        "id": 23373,
+                        "name": "vm",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 52,
+                        "src": "329:2:13",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_Vm_$7013",
+                          "typeString": "contract Vm"
+                        }
+                      },
+                      "id": 23375,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "332:14:13",
+                      "memberName": "startBroadcast",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 6129,
+                      "src": "329:17:13",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_nonpayable$__$returns$__$",
+                        "typeString": "function () external"
+                      }
+                    },
+                    "id": 23376,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "329:19:13",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 23377,
+                  "nodeType": "ExpressionStatement",
+                  "src": "329:19:13"
+                },
+                {
+                  "expression": {
+                    "arguments": [],
+                    "expression": {
+                      "argumentTypes": [],
+                      "id": 23380,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "NewExpression",
+                      "src": "359:15:13",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_creation_nonpayable$__$returns$_t_contract$_DAORegistry_$23363_$",
+                        "typeString": "function () returns (contract DAORegistry)"
+                      },
+                      "typeName": {
+                        "id": 23379,
+                        "nodeType": "UserDefinedTypeName",
+                        "pathNode": {
+                          "id": 23378,
+                          "name": "DAORegistry",
+                          "nameLocations": [
+                            "363:11:13"
+                          ],
+                          "nodeType": "IdentifierPath",
+                          "referencedDeclaration": 23363,
+                          "src": "363:11:13"
+                        },
+                        "referencedDeclaration": 23363,
+                        "src": "363:11:13",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_DAORegistry_$23363",
+                          "typeString": "contract DAORegistry"
+                        }
+                      }
+                    },
+                    "id": 23381,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "359:17:13",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_DAORegistry_$23363",
+                      "typeString": "contract DAORegistry"
+                    }
+                  },
+                  "id": 23382,
+                  "nodeType": "ExpressionStatement",
+                  "src": "359:17:13"
+                },
+                {
+                  "expression": {
+                    "arguments": [],
+                    "expression": {
+                      "argumentTypes": [],
+                      "expression": {
+                        "id": 23383,
+                        "name": "vm",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 52,
+                        "src": "387:2:13",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_Vm_$7013",
+                          "typeString": "contract Vm"
+                        }
+                      },
+                      "id": 23385,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberLocation": "390:13:13",
+                      "memberName": "stopBroadcast",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 6142,
+                      "src": "387:16:13",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_nonpayable$__$returns$__$",
+                        "typeString": "function () external"
+                      }
+                    },
+                    "id": 23386,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "nameLocations": [],
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "387:18:13",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 23387,
+                  "nodeType": "ExpressionStatement",
+                  "src": "387:18:13"
+                }
+              ]
+            },
+            "functionSelector": "775c300c",
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "deploy",
+            "nameLocation": "301:6:13",
+            "parameters": {
+              "id": 23371,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "307:2:13"
+            },
+            "returnParameters": {
+              "id": 23372,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "319:0:13"
+            },
+            "scope": 23390,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 23369,
+              "name": "Script",
+              "nameLocations": [
+                "279:6:13"
+              ],
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 108,
+              "src": "279:6:13"
+            },
+            "id": 23370,
+            "nodeType": "InheritanceSpecifier",
+            "src": "279:6:13"
+          }
+        ],
+        "canonicalName": "DeployDAORegistry",
+        "contractDependencies": [
+          23363
+        ],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          23390,
+          108,
+          71,
+          56,
+          5723,
+          2344,
+          772
+        ],
+        "name": "DeployDAORegistry",
+        "nameLocation": "258:17:13",
+        "scope": 23391,
+        "usedErrors": []
+      }
+    ],
+    "license": "UNLICENSED"
+  },
+  "id": 13
+}
